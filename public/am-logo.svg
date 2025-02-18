@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+    width="128" height="128"
+    viewBox="0 0 128 128"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+>
+    <!-- White circular background -->
+    <circle cx="64" cy="64" r="60" fill="white" />
+    
+    <g stroke="black" stroke-width="6" stroke-linecap="round" stroke-linejoin="miter">
+        <!-- "A" with strictly parallel sides to "M", maintaining distinct shapes -->
+        <path d="M40 88 L64 24 L88 88" />
+        
+        <!-- "M" with parallel outer sides matching "A", corrected valley position -->
+        <path d="M24 88 L48 24 L64 60 L80 24 L104 88" />
+    </g>
+</svg>
