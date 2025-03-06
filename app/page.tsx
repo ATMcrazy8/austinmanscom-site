@@ -31,7 +31,7 @@ export default function Home() {
 
         {/* About Section */}
         <section id="about" className="py-16 bg-card scroll-mt-16">
-          <div className="flex flex-col md:flex-row container items-center justify-center mx-auto text-start gap-12">
+          <div className="max-w-[calc(100%-40px)] flex flex-col md:flex-row container items-center justify-center mx-auto text-start gap-12">
             {/* Themed Headshot Component */}
             <ThemedHeadshot />
 
@@ -60,7 +60,7 @@ export default function Home() {
 
         {/* Why Web Matters Section */}
         <section className="py-16 bg-background">
-          <div className="flex flex-col items-start justify-center container mx-auto text-center gap-8">
+          <div className="max-w-[calc(100%-40px)] flex flex-col items-start justify-center container mx-auto text-center gap-8">
             <WebMetricsSection />
             
             <div className="w-full flex flex-col items-start shadow text-start px-6 py-3 bg-secondary rounded-lg gap-4">
@@ -82,11 +82,11 @@ export default function Home() {
 
         {/* Theme Picker Section */}
         <section id="showcase" className="py-16 scroll-mt-16">
-          <div className="container mx-auto text-center">
+          <div className="container mx-auto text-center max-w-[calc(100%-40px)]">
             <h2 className="text-3xl font-semibold mb-6">Customize Your Experience</h2>
             <div className="flex flex-col items-center gap-4">
               {/* Theme Selector */}
-              <div className="flex gap-4">
+              <div className="flex gap-4 flex-wrap items-center justify-center">
                 {themes.map((themeName) => (
                   <button
                     key={themeName}
@@ -123,40 +123,40 @@ export default function Home() {
 
         {/* Contact Section */}
         <section id="contact" className="flex items-center justify-center py-16 bg-card scroll-mt-16">
-          <div className="flex flex-col md:flex-row w-full items-center justify-between text-start">
+          <div className="max-w-[calc(100%-40px)] flex flex-col md:flex-row container w-full items-center justify-between text-start">
             <div className="flex flex-col p-6 gap-4">
               <h2 className="text-3xl font-semibold">Let's Chat</h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 My preferred method of communication for inquiries is email or text. However, If you have a project you'd like to discuss you can reach me at any of the following:
               </p>
             </div>
-            <ul className="w-[400px] bg-card text-card-foreground p-6">
-              <li className="mb-1">
+            <ul className="w-[300px] bg-gradient-to-br from-secondary-foreground to-ring text-card text-[12px] p-4 rounded-lg">
+              <li className="mb-2">
                 <a 
-                  className="flex flex-row items-center justify-between"
+                  className="flex flex-row items-center justify-between gap-4 p-2 rounded-md hover:bg-card/20"
                   href="sms:9522884408"
                 >
-                  <h3>Phone</h3>
+                  <h3>Phone: </h3>
                   <p className="font-mono">(952)288-4408</p>
                 </a>
               </li>
-              <li className="mb-1">
+              <li className="mb-2">
                 <a 
-                  className="flex flex-row items-center justify-between"
+                  className="flex flex-row items-center justify-between gap-4 p-2 rounded-md hover:bg-card/20"
                   href="mailto:austin.t.mans@gmail.com" 
                   target="_blank"
                 >
-                  <h3>Email</h3>
+                  <h3>Email: </h3>
                   <p className="font-mono">austin.t.mans@gmail.com</p>
                 </a>
               </li>
-              <li className="mb-1">
+              <li>
                 <a 
-                  className="flex flex-row items-center justify-between"
+                  className="flex flex-row items-center justify-between gap-4 p-2 rounded-md hover:bg-card/20"
                   href="https://www.linkedin.com/in/austin-mans/"
                   target="_blank"
                 >
-                  <h3>LinkedIn</h3>
+                  <h3>LinkedIn: </h3>
                   <p className="font-mono">/austin-mans</p>
                 </a>
               </li>
@@ -168,7 +168,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="py-4 bg-card text-center">
-        <p className="text-sm text-muted-foreground">
+        <p className="max-w-[calc(100%-40px)] text-sm text-muted-foreground">
           &copy; {new Date().getFullYear()} Austin Mans Portfolio. All rights reserved.
         </p>
       </footer>

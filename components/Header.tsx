@@ -17,7 +17,7 @@ export default function Header() {
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo Replacement */}
         <div className="flex items-center gap-2">
-          <h1 className="text-xl font-bold">Austin Mans | Web Development</h1>
+          <h1 className="text-xl font-bold">Austin Mans | Web</h1>
         </div>
 
         <nav className="flex items-center gap-4">
@@ -44,7 +44,7 @@ export default function Header() {
 
           {/* Contact Me Button */}
           <button
-            className="px-4 py-2 bg-secondary text-secondary-foreground rounded-md hover:bg-accent transition-colors"
+            className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-ring transition-colors"
             onClick={() => scrollToSection("contact")}
           >
             Contact Me
