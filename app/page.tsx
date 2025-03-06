@@ -2,87 +2,80 @@
 
 import { useTheme } from "@/app/context/ThemeProvider";
 import ThemedHeadshot from "@/components/ThemedHeadshot";
+import WebMetricsSection from "@/components/WebMetricsSection";
 
 const themes = ["mint", "ocean", "meadow", "lava", "space"];
 
 export default function Home() {
   const { theme, setTheme, isDarkMode, toggleDarkMode } = useTheme();
 
+  if (!theme) return null;
+
   return (
-    <div className="min-h-screen bg-background text-foreground transition-colors duration-500">
+    <div className="min-h-screen bg-gradient-to-br from-ring to-background text-foreground transition-colors duration-500"> {/* bg-background */}
       <main>
         {/* Top Section */}
-        <section id="top" className="py-20 bg-background text-center scroll-mt-16">
-          <div className="container mx-auto">
-            <h1 className="text-5xl font-bold mb-6">Crafting Modern Web Experiences</h1>
-            <p className="text-xl text-muted-foreground mb-8">
+        <section id="top" className="flex flex-col items-center py-20 bg-background text-center scroll-mt-16">
+          <div className="flex flex-col items-center w-full max-w-[calc(100%-40px)]">
+            <h1 className="text-5xl font-bold mb-6 ">Crafting <span className="text-transparent bg-clip-text bg-gradient-to-br from-foreground via-primary to-foreground to-90%">Modern</span> Web Experiences</h1>
+            <p className="w-max-[75%] text-xl text-muted-foreground mb-8">
               Building fast, accessible, and responsive websites that leave an impression.
             </p>
             <button
               onClick={() => document.getElementById("showcase")?.scrollIntoView({ behavior: "smooth" })}
-              className="px-6 py-3 bg-primary text-primary-foreground rounded-lg shadow-lg hover:bg-secondary transition-colors">
+              className="px-6 py-3 bg-primary text-primary-foreground rounded-lg shadow-lg hover:bg-ring transition-colors">
               View My Work
             </button>
           </div>
         </section>
 
-        {/* Why Web Matters Section */}
-        <section className="py-16 bg-card">
-          <div className="flex flex-col md:flex-row items-center justify-center container mx-auto text-center gap-8">
-            <div className="flex flex-col items-start text-start p-4 bg-secondary rounded-lg">
-              <h2 className="text-3xl font-semibold mb-4">Prioritize Your Web Presence</h2>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
-                A well-designed and developed website isn't just about aesthetics—it's about user experience, accessibility, and performance. It helps you stand out, engage users, and convert visitors into customers.
-              </p>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
-                Users will feel a reaction from visiting your site. Some sites don't have intuitive navigation, some sites have colors that clash unpleasantly, some sites have long load times. With the ever-shortening attention span of today's average web user, any one of these things could be the difference between a lifelong client and a quick hit of the 'back' button.
-              </p>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                A great web presence sets companies apart from one another, not only in the eyes of users, but also with search engines like Google and Bing. Prioritizing your Search Engine Optimization (SEO) is paramount to converting new viewers into first-time customers. Companies, especially smaller ones, tend to neglect this because its either too confusing or requires too much time and money to properly address.
-              </p>
-            </div>
-
-            <div className="flex flex-col w-full md:w-auto gap-8 justify-between">
-              {["1. Performance", "2. Accessibility", "3. Engagement"].map((feature) => (
-                <div key={feature} className="p-6 bg-secondary rounded-lg shadow text-start md:text-center">
-                  <h3 className="text-xl text-secondary-foreground font-bold mb-2">{feature}</h3>
-                  <p className="text-card-foreground">
-                    {feature === "1. Performance"
-                      ? "Fast-loading sites keep users engaged and improve SEO."
-                      : feature === "2. Accessibility"
-                      ? "Reach more users by ensuring everyone can access your content."
-                      : "Beautiful, intuitive design keeps users exploring your site longer."}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* About Section */}
         <section id="about" className="py-16 bg-card scroll-mt-16">
-          <div className="flex flex-row container items-center justify-center mx-auto text-start gap-12">
+          <div className="flex flex-col md:flex-row container items-center justify-center mx-auto text-start gap-12">
             {/* Themed Headshot Component */}
             <ThemedHeadshot />
 
             <div>
-              <h2 className="text-3xl font-semibold mb-4">So, Who Am I?</h2>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-4">
-                My name is Austin, I'm a passionate web developer based in Hudson, WI.
-                I specialize in crafting modern, responsive websites that not only
-                look great but also perform seamlessly across platforms.
+              <h2 className="text-3xl font-semibold mb-4">So, Who <i>Are</i> You?</h2>
+              <p className="text-lg text-card-foreground max-w-3xl mx-auto mb-4">
+                Hi, I’m Austin—a web developer based in Hudson, WI. I build modern, responsive websites that look great and function flawlessly across all devices.
               </p>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-4">
-                Whether you need a refresh, an upgrade, or a brand-new site, I’d love
-                to chat. 
-                <button 
-                  onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+              <p className="text-lg text-card-foreground max-w-3xl mx-auto mb-4">
+                Whether you need a refresh, an upgrade, or a brand-new site, I can help. Let’s create something that works for you.
+              </p>
+              <p className="w-auto text-lg text-card-foreground max-w-3xl mx-auto">
+                If your site needs a lift,
+                <a
+                  href="#contact"
                   className="text-ring underline px-[4px] mx-[2px] rounded-sm"
                 >
-                  Reach out
-                </button>
-                and let's get the ball rolling!
+                  reach out
+                </a>
+                and let's get started.
               </p>
+            </div>
+          </div>
+        </section>
+
+
+        {/* Why Web Matters Section */}
+        <section className="py-16 bg-background">
+          <div className="flex flex-col items-start justify-center container mx-auto text-center gap-8">
+            <WebMetricsSection />
+            
+            <div className="w-full flex flex-col items-start shadow text-start px-6 py-3 bg-secondary rounded-lg gap-4">
+              <h2 className="text-3xl font-semibold">Prioritizing Your Web Presence Matters</h2>
+              <div className="flex flex-col items-start text-lg text-card-foreground gap-8">
+                <p>
+                  A well-designed website is more than just aesthetics—it’s about performance, accessibility, and a seamless user experience. In a world where attention spans are short, slow load times, poor navigation, or clashing colors can be the difference between gaining a customer or losing them to the ‘back’ button.
+                </p>
+                <p>
+                  Beyond user experience, a strong web presence directly impacts search rankings. Many businesses, especially smaller ones, struggle with SEO because it’s complex, time-consuming, and often expensive. But neglecting it means missing out on potential customers who never find you in the first place.
+                </p>
+                <p>
+                  If your site needs a refresh, an upgrade, or just a few strategic improvements, don’t waste time guessing—I can help you optimize your site to meet both user expectations and business goals. Let’s build something that works.
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -129,22 +122,45 @@ export default function Home() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-16 bg-card scroll-mt-16">
-          <div className="flex flex-col w-full items-center mx-auto text-start">
-            <h2 className="text-3xl font-semibold mb-4">So, Who Am I?</h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-4">
-              My name is Austin, I'm a passionate web developer based in Hudson, WI. I specialize in crafting modern, responsive websites that not only look great but also perform seamlessly across platforms.
-            </p>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-4">
-              Whether you need a refresh, an upgrade, or a brand-new site, I’d love to chat. 
-              <button 
-                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-                className="text-link underline px-[4px] mx-[2px] rounded-sm"
-              >
-                Reach out
-              </button>
-              and let's get the ball rolling!
-            </p>
+        <section id="contact" className="flex items-center justify-center py-16 bg-card scroll-mt-16">
+          <div className="flex flex-col md:flex-row w-full items-center justify-between text-start">
+            <div className="flex flex-col p-6 gap-4">
+              <h2 className="text-3xl font-semibold">Let's Chat</h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                My preferred method of communication for inquiries is email or text. However, If you have a project you'd like to discuss you can reach me at any of the following:
+              </p>
+            </div>
+            <ul className="w-[400px] bg-card text-card-foreground p-6">
+              <li className="mb-1">
+                <a 
+                  className="flex flex-row items-center justify-between"
+                  href="sms:9522884408"
+                >
+                  <h3>Phone</h3>
+                  <p className="font-mono">(952)288-4408</p>
+                </a>
+              </li>
+              <li className="mb-1">
+                <a 
+                  className="flex flex-row items-center justify-between"
+                  href="mailto:austin.t.mans@gmail.com" 
+                  target="_blank"
+                >
+                  <h3>Email</h3>
+                  <p className="font-mono">austin.t.mans@gmail.com</p>
+                </a>
+              </li>
+              <li className="mb-1">
+                <a 
+                  className="flex flex-row items-center justify-between"
+                  href="https://www.linkedin.com/in/austin-mans/"
+                  target="_blank"
+                >
+                  <h3>LinkedIn</h3>
+                  <p className="font-mono">/austin-mans</p>
+                </a>
+              </li>
+            </ul>
           </div>
         </section>
 

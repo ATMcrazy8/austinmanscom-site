@@ -13,7 +13,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-card p-4 shadow-lg">
+    <header className="sticky top-0 z-50 w-full p-4 shadow-lg bg-ring/25 backdrop-blur-lg">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo Replacement */}
         <div className="flex items-center gap-2">
@@ -44,7 +44,7 @@ export default function Header() {
 
           {/* Contact Me Button */}
           <button
-            className="px-4 py-2 bg-accent text-accent-foreground rounded-md hover:bg-primary transition-colors"
+            className="px-4 py-2 bg-secondary text-secondary-foreground rounded-md hover:bg-accent transition-colors"
             onClick={() => scrollToSection("contact")}
           >
             Contact Me

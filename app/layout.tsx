@@ -2,17 +2,19 @@
 
 import { ThemeProvider } from "./context/ThemeProvider";
 import Header from "@/components/Header";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Space_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const spaceMono = Space_Mono({
+  variable: "--font-space-mono",
   subsets: ["latin"],
+  weight: ["400", "700"]
 });
 
 export default function RootLayout({
@@ -21,8 +23,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="bg-background text-foreground min-h-screen">
+    <html lang="en" className={`${inter.variable} ${spaceMono.variable}`}>
+      <body className="bg-background text-foreground min-h-screen font-sans">
         <ThemeProvider>
           <Header />
           {children}

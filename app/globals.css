@@ -5,6 +5,7 @@
 /* Smooth theme transition */
 html {
   transition: background-color 0.5s ease, color 0.25s ease;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -22,7 +23,7 @@ body {
     --card: var(--hue) 50% 96%;
     --card-foreground: var(--hue) 90% 14%;
     
-    --primary: var(--hue) 90% 40%;  /* Main button color */
+    --primary: var(--hue) 90% 40%;
     --primary-foreground: var(--hue) 100% 98%;
     
     --secondary: var(--hue) 60% 92%;
