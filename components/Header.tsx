@@ -20,25 +20,9 @@ export default function Header() {
         </div>
 
         <nav className="flex items-center gap-4">
-          <ul className="hidden sm:flex gap-4">
-            <li
-              className="cursor-pointer hover:text-primary"
-              onClick={() => scrollToSection("top")}
-            >
-              Top
-            </li>
-            <li
-              className="cursor-pointer hover:text-primary"
-              onClick={() => scrollToSection("about")}
-            >
-              About
-            </li>
-          </ul>
-
 
           <ThemePicker />
           
-
           <button
             className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-ring transition-colors"
             onClick={() => scrollToSection("contact")}
@@ -47,6 +31,7 @@ export default function Header() {
           </button>
           
         </nav>
+        
       </div>
     </header>
   );
