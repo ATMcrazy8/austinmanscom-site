@@ -40,7 +40,7 @@ export default function ThemePicker() {
     >
       {/* Dropdown Button */}
       <button
-        className="flex items-center gap-1 text-foreground hover:text-primary transition-colors"
+        className="flex items-center py-2 gap-1 text-sm md:text-base text-foreground hover:text-primary transition-colors"
         onClick={() => isTouchDevice && setIsOpen((prev) => !prev)} // Toggle on click (mobile)
       >
         Theme
