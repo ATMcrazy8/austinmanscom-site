@@ -2,6 +2,7 @@
 
 import { useTheme } from "@/app/context/ThemeProvider";
 import ThemedHeadshot from "@/components/ThemedHeadshot";
+import { motion } from "framer-motion"; 
 import WebMetricsSection from "@/components/WebMetricsSection";
 
 export default function Home() {
@@ -13,17 +14,39 @@ export default function Home() {
     <div className="min-h-screen text-foreground bg-background transition-colors duration-500"> {/* bg-background */}
       <main>
         {/* Top Section */}
-        <section id="top" className="flex flex-col items-center py-20 bg-gradient-to-r from-ring/60 to-background text-center scroll-mt-16">
-          <div className="flex flex-col items-center w-full max-w-[calc(100%-40px)]">
-            <h1 className="text-5xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-foreground via-card-foreground to-foreground pb-1">Crafting Modern Web Experiences</h1>
+        <section id="top" className="flex flex-col items-center py-20 bg-gradient-to-r from-ring/60 to-background text-center scroll-mt-16 overflow-hidden relative">
+          <div className="w-[80px] h-[900px] flex items-center justify-between bg-none absolute z-0 top-[-300px] right-[15%] rotate-[20deg]">
+            <motion.div
+              initial={{ opacity: 0, x: -1000 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1.2, delay: 0.2, ease: [0.2, 0.9, 0.4, 1]}}
+              className="w-2 h-full bg-ring/15"
+            ></motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: -1000 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1.2, delay: 0.2, ease: [0.39, 0.24, 0.3, 1]}}
+              className="w-4 h-full bg-ring/30"
+            ></motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: -1000 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1.2, delay: 0.2, ease: [0.6, 0, 0.3, 1]}}
+              className="w-6 h-full bg-ring/45"
+            ></motion.div>
+          </div>
+          <div className="flex flex-col items-center w-full max-w-[calc(100%-40px)] z-10">
+            <h1 className="text-5xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-foreground via-card-foreground to-foreground pb-1">
+              Crafting Modern Web Experiences
+            </h1>
             <p className="w-max-[75%] text-xl text-foreground/80 mb-8">
               Custom fast, accessible, and responsive websites that leave an impression.
             </p>
-            <button
+            {/* <button
               onClick={() => document.getElementById("showcase")?.scrollIntoView({ behavior: "smooth" })}
               className="px-6 py-3 bg-primary text-primary-foreground rounded-lg shadow-lg hover:bg-ring transition-colors">
               View My Work
-            </button>
+            </button> */}
           </div>
         </section>
 
@@ -36,7 +59,7 @@ export default function Home() {
             <div>
               <h2 className="text-3xl font-semibold mb-4">Hi, Nice To Meet You</h2>
               <p className="text-lg text-card-foreground max-w-3xl mx-auto mb-4">
-                I&apos;m Austin—a web developer based in Hudson, WI. I build modern, responsive websites that look great and function flawlessly across all devices.
+                I&apos;m Austin—a web developer based in Hudson, WI. I build modern, responsive websites that look great and function flawlessly across devices.
               </p>
               <p className="text-lg text-card-foreground max-w-3xl mx-auto mb-4">
                 Whether you need a refresh, an upgrade, or a brand-new site, I can help. Let&apos;s create something that works for you.
