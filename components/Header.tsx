@@ -13,22 +13,22 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 flex items-center justify-center w-full py-4 shadow-lg bg-ring/25 backdrop-blur-lg">
-      <div className="flex w-[calc(100%-40px)] container justify-between items-center">
+      <div className="flex w-[calc(100%-40px)] max-w-[1520px] justify-between items-center">
         {/* Logo Replacement */}
-        <div className="flex items-center gap-2">
-          <h1 className="text-xl font-bold text-card-foreground">Austin Mans<span className="text-secondary-foreground"> | Web</span></h1>
+        <div className="flex items-center gap-2 border-l-2 pl-1 md:pl-2 border-ring">
+          <div className="text-sm/[1rem] md:text-xl/[1.2rem] font-bold text-monotone-foreground">Austin Mans<span className="text-secondary-foreground text-[10px] md:text-sm"><br/>Web Development</span></div>
         </div>
 
         <nav className="flex items-center gap-4">
 
-          <ThemePicker />
-          
           <button
-            className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-ring transition-colors"
+            className="px-4 py-2 bg-primary text-sm md:text-base text-primary-foreground rounded-md hover:bg-ring transition-colors"
             onClick={() => scrollToSection("contact")}
           >
-            Contact Me
+            Contact<span className="hidden md:inline"> Me</span>
           </button>
+
+          <ThemePicker />
           
         </nav>
         

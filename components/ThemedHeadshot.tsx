@@ -19,7 +19,7 @@ export default function ThemedHeadshot() {
   const hueRotateValue = (hue - 53 + 360) % 360; // Adjust rotation
 
   return (
-    <div className="flex items-center justify-center border-4 border-foreground rounded-full overflow-hidden">
+    <div className="flex items-center justify-center border-4 border-monotone-foreground rounded-full overflow-hidden">
       <Image
         src="/AustinMansHeadshot.jpg"
         width={240}

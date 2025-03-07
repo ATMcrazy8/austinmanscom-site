@@ -14,32 +14,77 @@ export default function Home() {
     <div className="min-h-screen text-foreground bg-background transition-colors duration-500"> {/* bg-background */}
       <main>
         {/* Top Section */}
-        <section id="top" className="flex flex-col items-center py-20 bg-gradient-to-r from-ring/60 to-background text-center scroll-mt-16 overflow-hidden relative">
-          <div className="w-[80px] h-[900px] flex items-center justify-between bg-none absolute z-0 top-[-300px] right-[15%] rotate-[20deg]">
+        <section id="top" className="h-[40rem] flex flex-col items-center justify-center py-20 bg-gradient-to-r from-primary/30 to-monotone to-60% md:to-75% text-center scroll-mt-16 overflow-hidden relative">
+
+          {/* Stripe Gradients */}
+          <div className="w-[160px] h-[150vh] flex items-center justify-between bg-none absolute z-0 top-[-5vh] md:top-[-10vh] right-[20%] md:right-[15%] rotate-[20deg]">
             <motion.div
-              initial={{ opacity: 0, x: -1000 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.2, delay: 0.2, ease: [0.2, 0.9, 0.4, 1]}}
-              className="w-2 h-full bg-ring/15"
+              initial={{ opacity: 0, x: -1000, rotate: -180 }}
+              animate={{ opacity: 1, x: 0, rotate: 0 }}
+              transition={{ duration: 1.2, delay: 0.1, ease: [0.2, 0.9, 0.5, 1.03]}}
+              className="w-2 h-full bg-ring/[2%]"
             ></motion.div>
             <motion.div
-              initial={{ opacity: 0, x: -1000 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.2, delay: 0.2, ease: [0.39, 0.24, 0.3, 1]}}
-              className="w-4 h-full bg-ring/30"
+              initial={{ opacity: 0, x: -1000, rotate: -165 }}
+              animate={{ opacity: 1, x: 0, rotate: 0 }}
+              transition={{ duration: 1.2, delay: 0.15, ease: [0.25, 0.9, 0.45, 1.03]}}
+              className="w-2 h-full bg-ring/[4%]"
             ></motion.div>
             <motion.div
-              initial={{ opacity: 0, x: -1000 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.2, delay: 0.2, ease: [0.6, 0, 0.3, 1]}}
-              className="w-6 h-full bg-ring/45"
+              initial={{ opacity: 0, x: -1000, rotate: -150 }}
+              animate={{ opacity: 1, x: 0, rotate: 0 }}
+              transition={{ duration: 1.2, delay: 0.2, ease: [0.3, 0.7, 0.4, 1.03]}}
+              className="w-3 h-full bg-ring/[6%]"
+            ></motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: -1000, rotate: -135 }}
+              animate={{ opacity: 1, x: 0, rotate: 0 }}
+              transition={{ duration: 1.2, delay: 0.25, ease: [0.35, 0.7, 0.35, 1.1]}}
+              className="w-3 h-full bg-ring/[8%]"
+            ></motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: -1000, rotate: -120 }}
+              animate={{ opacity: 1, x: 0, rotate: 0}}
+              transition={{ duration: 1.2, delay: 0.3, ease: [0.4, 0.5, 0.3, 1.1]}}
+              className="w-4 h-full bg-ring/[10%]"
+            ></motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: -1000, rotate: -105 }}
+              animate={{ opacity: 1, x: 0, rotate: 0}}
+              transition={{ duration: 1.2, delay: 0.35, ease: [0.45, 0.5, 0.25, 1.1]}}
+              className="w-4 h-full bg-ring/[12%]"
+            ></motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: -1000, rotate: -90 }}
+              animate={{ opacity: 1, x: 0, rotate: 0}}
+              transition={{ duration: 1.2, delay: 0.4, ease: [0.5, 0.3, 0.2, 1.1]}}
+              className="w-5 h-full bg-ring/[14%]"
+            ></motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: -1000, rotate: -75 }}
+              animate={{ opacity: 1, x: 0, rotate: 0}}
+              transition={{ duration: 1.2, delay: 0.45, ease: [0.55, 0.3, 0.15, 1.1]}}
+              className="w-5 h-full bg-ring/[16%]"
+            ></motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: -1000, rotate: -60 }}
+              animate={{ opacity: 1, x: 0, rotate: 0 }}
+              transition={{ duration: 1.2, delay: 0.5, ease: [0.6, 0.1, 0.1, 1.1]}}
+              className="w-6 h-full bg-ring/[18%]"
+            ></motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: -1000, rotate: -45 }}
+              animate={{ opacity: 1, x: 0, rotate: 0 }}
+              transition={{ duration: 1.2, delay: 0.55, ease: [0.65, 0.1, 0.05, 1.1]}}
+              className="w-6 h-full bg-ring/[20%]"
             ></motion.div>
           </div>
+
           <div className="flex flex-col items-center w-full max-w-[calc(100%-40px)] z-10">
-            <h1 className="text-5xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-foreground via-card-foreground to-foreground pb-1">
+            <h1 className="text-3xl md:text-5xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-monotone-foreground via-card-foreground to-monotone-foreground pb-1 text-balance">
               Crafting Modern Web Experiences
             </h1>
-            <p className="w-max-[75%] text-xl text-foreground/80 mb-8">
+            <p className="max-w-[99.24%] sm:max-w-[88.5%] text-balance text-sm md:text-xl text-foreground/80 mb-8">
               Custom fast, accessible, and responsive websites that leave an impression.
             </p>
             {/* <button
@@ -51,15 +96,15 @@ export default function Home() {
         </section>
 
         {/* About Section */}
-        <section id="about" className="py-16 bg-background scroll-mt-16">
+        <section id="about" className="py-16 bg-monotone scroll-mt-16">
           <div className="max-w-[calc(100%-40px)] flex flex-col md:flex-row container items-center justify-center mx-auto text-start gap-12">
             {/* Themed Headshot Component */}
             <ThemedHeadshot />
 
             <div>
-              <h2 className="text-3xl font-semibold mb-4">Hi, Nice To Meet You</h2>
+              <h2 className="text-3xl font-semibold mb-4">A Bit About Me</h2>
               <p className="text-lg text-card-foreground max-w-3xl mx-auto mb-4">
-                I&apos;m Austin—a web developer based in Hudson, WI. I build modern, responsive websites that look great and function flawlessly across devices.
+                Hello! I&apos;m Austin. I am a web developer based in Hudson, WI. I build modern, responsive websites that look great and function flawlessly across devices.
               </p>
               <p className="text-lg text-card-foreground max-w-3xl mx-auto mb-4">
                 Whether you need a refresh, an upgrade, or a brand-new site, I can help. Let&apos;s create something that works for you.
@@ -80,13 +125,13 @@ export default function Home() {
 
 
         {/* Why Web Matters Section */}
-        <section className="py-16 bg-gradient-to-r from-ring/60 to-background">
-          <div className="w-[calc(100%-40px)] flex flex-col items-center justify-center container mx-auto text-center gap-8">
+        <section className="flex items-center justify-center py-16 min-h-[100vh] bg-gradient-to-r from-ring/60 via-ring/40 via-20% to-ring/10">
+          <div className="w-[calc(100%-40px)] max-w-[1520px] flex flex-col items-center justify-center mx-auto text-center gap-8">
             <WebMetricsSection />
             
-            <div className="w-full flex flex-col items-start shadow text-start px-6 py-3 bg-card rounded-lg gap-4">
-              <h2 className="text-3xl font-semibold">Prioritizing Your Web Presence Matters</h2>
-              <div className="flex flex-col items-start text-lg text-card-foreground gap-8">
+            <div className="w-full flex flex-col items-start shadow text-start p-6 bg-card rounded-lg gap-4">
+              <h2 className="text-3xl text-monotone-foreground/85 font-semibold">Prioritizing Your Web Presence Matters</h2>
+              <div className="flex flex-col items-start text-base/[1.4rem] text-card-foreground gap-8">
                 <p>
                   A well-designed website is more than just aesthetics—it&apos;s about performance, accessibility, and a seamless user experience. In a world where attention spans are short, slow load times, poor navigation, or clashing colors can be the difference between gaining a customer or losing them to the &apos;back&apos; button.
                 </p>
@@ -102,43 +147,43 @@ export default function Home() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="flex items-center justify-center py-16 bg-background scroll-mt-16">
-          <div className="w-[calc(100%-40px)] flex flex-col lg:flex-row container items-center justify-between text-start">
-            <div className="flex flex-col p-6 gap-4 w-full lg:w-3/5">
-              <h2 className="text-5xl font-semibold text-secondary-foreground">Let&apos;s Chat!</h2>
-              <p className="text-lg text-foreground mx-auto">
-                My preferred method of communication for inquiries is email or text. However, If you have a project you&apos;d like to discuss you can call or message me at any of the following:
+        <section id="contact" className="flex items-center justify-center min-h-[50vh] bg-monotone scroll-mt-16">
+          <div className="w-[calc(100%-40px)] max-w-[1520px] flex flex-col items-center justify-between text-start gap-10">
+            <div className="flex flex-col items-center text-center gap-4 text-pretty max-w-[28rem]">
+              <h2 className="text-3xl md:text-5xl font-semibold text-monotone-foreground">Let&apos;s Talk!</h2>
+              <p className="text-sm md:text-lg text-card-foreground mx-auto">
+                Email or text are usually best, but I can be reached at any of the following:
               </p>
             </div>
-            <div className="block mx-auto">
-              <ul className="w-[24rem] bg-card text-secondary-foreground p-2 border-2 border-border/45 rounded-lg">
+            <div className="block w-full max-w-[28rem] mx-auto">
+              <ul className="w-full bg-primary/80 text-sm md:text-base text-primary-foreground p-2 shadow rounded-lg">
                 <li className="mb-2">
                   <a 
-                    className="flex flex-row items-center justify-between gap-4 p-2 rounded-md hover:bg-card-foreground/5"
+                    className="flex flex-row flex-wrap items-center justify-between gap-4 p-2 rounded-md hover:bg-card-foreground/10"
                     href="sms:9522884408"
                   >
-                    <h3>Phone: </h3>
-                    <p className="font-mono">(952)288-4408</p>
+                    <h3 className="w-16">Phone: </h3>
+                    <p className="w-48 text-end ml-auto mr-0">(952)288-4408</p>
                   </a>
                 </li>
                 <li className="mb-2">
                   <a 
-                    className="flex flex-row items-center justify-between gap-4 p-2 rounded-md hover:bg-card-foreground/5"
+                    className="flex flex-row flex-wrap items-center justify-between gap-4 p-2 rounded-md hover:bg-card-foreground/10"
                     href="mailto:austin.t.mans@gmail.com" 
                     target="_blank"
                   >
-                    <h3>Email: </h3>
-                    <p className="font-mono">austin.t.mans@gmail.com</p>
+                    <h3 className="w-16">Email: </h3>
+                    <p className="w-48 text-end  ml-auto mr-0">austin.t.mans@gmail.com</p>
                   </a>
                 </li>
                 <li>
                   <a 
-                    className="flex flex-row items-center justify-between gap-4 p-2 rounded-md hover:bg-card-foreground/5"
+                    className="flex flex-row flex-wrap items-center justify-between gap-4 p-2 rounded-md hover:bg-card-foreground/10"
                     href="https://www.linkedin.com/in/austin-mans/"
                     target="_blank"
                   >
-                    <h3>LinkedIn: </h3>
-                    <p className="font-mono">/austin-mans</p>
+                    <h3 className="w-16">LinkedIn: </h3>
+                    <p className="w-48 text-end  ml-auto mr-0">/austin-mans</p>
                   </a>
                 </li>
               </ul>
@@ -150,7 +195,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="py-2 bg-card text-center">
-        <p className="max-w-[calc(100%-40px)] text-sm text-muted-foreground">
+        <p className="max-w-[calc(100%-40px)] text-xs text-muted-foreground">
           &copy; {new Date().getFullYear()} Austin Mans Portfolio. All rights reserved.
         </p>
       </footer>

@@ -40,6 +40,10 @@ export default {
   				DEFAULT: 'hsl(var(--accent))',
   				foreground: 'hsl(var(--accent-foreground))'
   			},
+			monotone: {
+				DEFAULT: 'hsl(var(--monotone))',
+				foreground: 'hsl(var(--monotone-foreground))'
+			},
   			destructive: {
   				DEFAULT: 'hsl(var(--destructive))',
   				foreground: 'hsl(var(--destructive-foreground))'
