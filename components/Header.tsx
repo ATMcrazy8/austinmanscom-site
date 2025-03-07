@@ -13,7 +13,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 flex items-center justify-center w-full py-4 shadow-lg bg-ring/25 backdrop-blur-lg">
-      <div className="flex w-full max-w-[calc(100%-40px)] justify-between items-center">
+      <div className="flex w-[calc(100%-40px)] container justify-between items-center">
         {/* Logo Replacement */}
         <div className="flex items-center gap-2">
           <h1 className="text-xl font-bold text-card-foreground">Austin Mans<span className="text-secondary-foreground"> | Web</span></h1>

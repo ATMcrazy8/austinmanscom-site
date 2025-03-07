@@ -36,7 +36,7 @@ export default function Home() {
             <div>
               <h2 className="text-3xl font-semibold mb-4">Hi, Nice To Meet You</h2>
               <p className="text-lg text-card-foreground max-w-3xl mx-auto mb-4">
-                I’m Austin—a web developer based in Hudson, WI. I build modern, responsive websites that look great and function flawlessly across all devices.
+                I&apos;m Austin—a web developer based in Hudson, WI. I build modern, responsive websites that look great and function flawlessly across all devices.
               </p>
               <p className="text-lg text-card-foreground max-w-3xl mx-auto mb-4">
                 Whether you need a refresh, an upgrade, or a brand-new site, I can help. Let&apos;s create something that works for you.
@@ -58,20 +58,20 @@ export default function Home() {
 
         {/* Why Web Matters Section */}
         <section className="py-16 bg-gradient-to-r from-ring/60 to-background">
-          <div className="max-w-[calc(100%-40px)] flex flex-col items-start justify-center container mx-auto text-center gap-8">
+          <div className="w-[calc(100%-40px)] flex flex-col items-center justify-center container mx-auto text-center gap-8">
             <WebMetricsSection />
             
             <div className="w-full flex flex-col items-start shadow text-start px-6 py-3 bg-card rounded-lg gap-4">
               <h2 className="text-3xl font-semibold">Prioritizing Your Web Presence Matters</h2>
               <div className="flex flex-col items-start text-lg text-card-foreground gap-8">
                 <p>
-                  A well-designed website is more than just aesthetics—it’s about performance, accessibility, and a seamless user experience. In a world where attention spans are short, slow load times, poor navigation, or clashing colors can be the difference between gaining a customer or losing them to the ‘back’ button.
+                  A well-designed website is more than just aesthetics—it&apos;s about performance, accessibility, and a seamless user experience. In a world where attention spans are short, slow load times, poor navigation, or clashing colors can be the difference between gaining a customer or losing them to the &apos;back&apos; button.
                 </p>
                 <p>
-                  Beyond user experience, a strong web presence directly impacts search rankings. Many businesses, especially smaller ones, struggle with SEO because it’s complex, time-consuming, and often expensive. But neglecting it means missing out on potential customers who never find you in the first place.
+                  Beyond user experience, a strong web presence directly impacts search rankings. Many businesses, especially smaller ones, struggle with SEO because it&apos;s complex, time-consuming, and often expensive. But neglecting it means missing out on potential customers who never find you in the first place.
                 </p>
                 <p>
-                  If your site needs a refresh, an upgrade, or just a few strategic improvements, don’t waste time guessing—I can help you optimize your site to meet both user expectations and business goals. Let’s build something that works.
+                  If your site needs a refresh, an upgrade, or just a few strategic improvements, don&apos;t waste time guessing—I can help you optimize your site to meet both user expectations and business goals. Let&apos;s build something that works.
                 </p>
               </div>
             </div>
@@ -80,7 +80,7 @@ export default function Home() {
 
         {/* Contact Section */}
         <section id="contact" className="flex items-center justify-center py-16 bg-background scroll-mt-16">
-          <div className="max-w-[calc(100%-40px)] flex flex-col lg:flex-row container w-full items-center justify-between text-start">
+          <div className="w-[calc(100%-40px)] flex flex-col lg:flex-row container items-center justify-between text-start">
             <div className="flex flex-col p-6 gap-4 w-full lg:w-3/5">
               <h2 className="text-5xl font-semibold text-secondary-foreground">Let&apos;s Chat!</h2>
               <p className="text-lg text-foreground mx-auto">
