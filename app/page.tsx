@@ -14,7 +14,7 @@ export default function Home() {
     <div className="min-h-screen text-foreground bg-background transition-colors duration-500"> {/* bg-background */}
       <main>
         {/* Top Section */}
-        <section id="top" className="h-[40rem] flex flex-col items-center justify-center py-20 bg-gradient-to-r from-primary/30 to-monotone to-60% md:to-75% text-center scroll-mt-16 overflow-hidden relative">
+        <section id="top" className="h-[40rem] flex flex-col items-center justify-center py-20 bg-gradient-to-r backdrop-blur-sm from-primary/30 to-monotone to-60% md:to-75% text-center scroll-mt-16 overflow-hidden relative">
 
           {/* Stripe Gradients */}
           <div className="w-[160px] h-[150vh] flex items-center justify-between bg-none absolute z-0 top-[-5vh] md:top-[-10vh] right-[20%] md:right-[15%] rotate-[20deg]">
@@ -125,7 +125,7 @@ export default function Home() {
 
 
         {/* Why Web Matters Section */}
-        <section className="flex items-center justify-center py-16 min-h-[100vh] bg-gradient-to-r from-ring/60 via-ring/40 via-20% to-ring/10">
+        <section className="flex items-center justify-center py-16 min-h-[100vh] backdrop-blur-sm bg-gradient-to-r from-ring/60 via-ring/40 via-20% to-ring/10">
           <div className="w-[calc(100%-40px)] max-w-[1520px] flex flex-col items-center justify-center mx-auto text-center gap-8">
             <WebMetricsSection />
             
@@ -194,8 +194,8 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="py-2 bg-card text-center">
-        <p className="max-w-[calc(100%-40px)] text-xs text-muted-foreground">
+      <footer className="w-full p-2 flex items-center justify-center bg-card text-center">
+        <p className="max-w-[calc(100%-40px)] text-[8px] md:text-xs text-muted-foreground">
           &copy; {new Date().getFullYear()} Austin Mans Portfolio. All rights reserved.
         </p>
       </footer>
