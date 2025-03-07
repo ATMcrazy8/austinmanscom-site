@@ -5,7 +5,7 @@ import ThemedHeadshot from "@/components/ThemedHeadshot";
 import WebMetricsSection from "@/components/WebMetricsSection";
 
 export default function Home() {
-  const { theme, setTheme, isDarkMode, toggleDarkMode } = useTheme();
+  const { theme } = useTheme();
 
   if (!theme) return null;
 
@@ -39,7 +39,7 @@ export default function Home() {
                 I’m Austin—a web developer based in Hudson, WI. I build modern, responsive websites that look great and function flawlessly across all devices.
               </p>
               <p className="text-lg text-card-foreground max-w-3xl mx-auto mb-4">
-                Whether you need a refresh, an upgrade, or a brand-new site, I can help. Let’s create something that works for you.
+                Whether you need a refresh, an upgrade, or a brand-new site, I can help. Let&apos;s create something that works for you.
               </p>
               <p className="w-auto text-lg text-card-foreground max-w-3xl mx-auto">
                 If your website needs a lift,
@@ -49,7 +49,7 @@ export default function Home() {
                 >
                   reach out
                 </a>
-                and let's get started.
+                and let&apos;s get started.
               </p>
             </div>
           </div>
@@ -82,9 +82,9 @@ export default function Home() {
         <section id="contact" className="flex items-center justify-center py-16 bg-background scroll-mt-16">
           <div className="max-w-[calc(100%-40px)] flex flex-col lg:flex-row container w-full items-center justify-between text-start">
             <div className="flex flex-col p-6 gap-4 w-full lg:w-3/5">
-              <h2 className="text-5xl font-semibold text-secondary-foreground">Let's Chat!</h2>
+              <h2 className="text-5xl font-semibold text-secondary-foreground">Let&apos;s Chat!</h2>
               <p className="text-lg text-foreground mx-auto">
-                My preferred method of communication for inquiries is email or text. However, If you have a project you'd like to discuss you can call or message me at any of the following:
+                My preferred method of communication for inquiries is email or text. However, If you have a project you&apos;d like to discuss you can call or message me at any of the following:
               </p>
             </div>
             <div className="block mx-auto">
