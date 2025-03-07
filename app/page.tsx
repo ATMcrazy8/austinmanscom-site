@@ -4,22 +4,20 @@ import { useTheme } from "@/app/context/ThemeProvider";
 import ThemedHeadshot from "@/components/ThemedHeadshot";
 import WebMetricsSection from "@/components/WebMetricsSection";
 
-const themes = ["mint", "ocean", "meadow", "lava", "space"];
-
 export default function Home() {
   const { theme, setTheme, isDarkMode, toggleDarkMode } = useTheme();
 
   if (!theme) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-ring to-background text-foreground transition-colors duration-500"> {/* bg-background */}
+    <div className="min-h-screen text-foreground bg-background transition-colors duration-500"> {/* bg-background */}
       <main>
         {/* Top Section */}
-        <section id="top" className="flex flex-col items-center py-20 bg-background text-center scroll-mt-16">
+        <section id="top" className="flex flex-col items-center py-20 bg-gradient-to-r from-ring/60 to-background text-center scroll-mt-16">
           <div className="flex flex-col items-center w-full max-w-[calc(100%-40px)]">
-            <h1 className="text-5xl font-bold mb-6 ">Crafting <span className="text-transparent bg-clip-text bg-gradient-to-br from-foreground via-primary to-foreground to-90%">Modern</span> Web Experiences</h1>
-            <p className="w-max-[75%] text-xl text-muted-foreground mb-8">
-              Building fast, accessible, and responsive websites that leave an impression.
+            <h1 className="text-5xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-foreground via-card-foreground to-foreground pb-1">Crafting Modern Web Experiences</h1>
+            <p className="w-max-[75%] text-xl text-foreground/80 mb-8">
+              Custom fast, accessible, and responsive websites that leave an impression.
             </p>
             <button
               onClick={() => document.getElementById("showcase")?.scrollIntoView({ behavior: "smooth" })}
@@ -30,21 +28,21 @@ export default function Home() {
         </section>
 
         {/* About Section */}
-        <section id="about" className="py-16 bg-card scroll-mt-16">
+        <section id="about" className="py-16 bg-background scroll-mt-16">
           <div className="max-w-[calc(100%-40px)] flex flex-col md:flex-row container items-center justify-center mx-auto text-start gap-12">
             {/* Themed Headshot Component */}
             <ThemedHeadshot />
 
             <div>
-              <h2 className="text-3xl font-semibold mb-4">So, Who <i>Are</i> You?</h2>
+              <h2 className="text-3xl font-semibold mb-4">Hi, Nice To Meet You</h2>
               <p className="text-lg text-card-foreground max-w-3xl mx-auto mb-4">
-                Hi, I’m Austin—a web developer based in Hudson, WI. I build modern, responsive websites that look great and function flawlessly across all devices.
+                I’m Austin—a web developer based in Hudson, WI. I build modern, responsive websites that look great and function flawlessly across all devices.
               </p>
               <p className="text-lg text-card-foreground max-w-3xl mx-auto mb-4">
                 Whether you need a refresh, an upgrade, or a brand-new site, I can help. Let’s create something that works for you.
               </p>
               <p className="w-auto text-lg text-card-foreground max-w-3xl mx-auto">
-                If your site needs a lift,
+                If your website needs a lift,
                 <a
                   href="#contact"
                   className="text-ring underline px-[4px] mx-[2px] rounded-sm"
@@ -59,11 +57,11 @@ export default function Home() {
 
 
         {/* Why Web Matters Section */}
-        <section className="py-16 bg-background">
+        <section className="py-16 bg-gradient-to-r from-ring/60 to-background">
           <div className="max-w-[calc(100%-40px)] flex flex-col items-start justify-center container mx-auto text-center gap-8">
             <WebMetricsSection />
             
-            <div className="w-full flex flex-col items-start shadow text-start px-6 py-3 bg-secondary rounded-lg gap-4">
+            <div className="w-full flex flex-col items-start shadow text-start px-6 py-3 bg-card rounded-lg gap-4">
               <h2 className="text-3xl font-semibold">Prioritizing Your Web Presence Matters</h2>
               <div className="flex flex-col items-start text-lg text-card-foreground gap-8">
                 <p>
@@ -80,94 +78,55 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Theme Picker Section */}
-        <section id="showcase" className="py-16 scroll-mt-16">
-          <div className="container mx-auto text-center max-w-[calc(100%-40px)]">
-            <h2 className="text-3xl font-semibold mb-6">Customize Your Experience</h2>
-            <div className="flex flex-col items-center gap-4">
-              {/* Theme Selector */}
-              <div className="flex gap-4 flex-wrap items-center justify-center">
-                {themes.map((themeName) => (
-                  <button
-                    key={themeName}
-                    onClick={() => setTheme(themeName)}
-                    className={`px-4 py-2 rounded-lg transition-colors ${
-                      theme === themeName
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-secondary text-secondary-foreground"
-                    }`}
-                  >
-                    {themeName.charAt(0).toUpperCase() + themeName.slice(1)}
-                  </button>
-                ))}
-              </div>
-
-              {/* Light/Dark Mode Switch */}
-              <div className="flex items-center gap-2">
-                <span>Light</span>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={isDarkMode}
-                    onChange={toggleDarkMode}
-                    className="sr-only peer"
-                  />
-                  <div className="w-11 h-6 bg-muted rounded-full peer-focus:ring-4 peer-focus:ring-ring dark:bg-muted-foreground peer-checked:bg-primary"></div>
-                  <span className="absolute left-1 top-1 w-4 h-4 bg-background rounded-full transition-transform peer-checked:translate-x-5"></span>
-                </label>
-                <span>Dark</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Contact Section */}
-        <section id="contact" className="flex items-center justify-center py-16 bg-card scroll-mt-16">
-          <div className="max-w-[calc(100%-40px)] flex flex-col md:flex-row container w-full items-center justify-between text-start">
-            <div className="flex flex-col p-6 gap-4">
-              <h2 className="text-3xl font-semibold">Let's Chat</h2>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                My preferred method of communication for inquiries is email or text. However, If you have a project you'd like to discuss you can reach me at any of the following:
+        <section id="contact" className="flex items-center justify-center py-16 bg-background scroll-mt-16">
+          <div className="max-w-[calc(100%-40px)] flex flex-col lg:flex-row container w-full items-center justify-between text-start">
+            <div className="flex flex-col p-6 gap-4 w-full lg:w-3/5">
+              <h2 className="text-5xl font-semibold text-secondary-foreground">Let's Chat!</h2>
+              <p className="text-lg text-foreground mx-auto">
+                My preferred method of communication for inquiries is email or text. However, If you have a project you'd like to discuss you can call or message me at any of the following:
               </p>
             </div>
-            <ul className="w-[300px] bg-gradient-to-br from-secondary-foreground to-ring text-card text-[12px] p-4 rounded-lg">
-              <li className="mb-2">
-                <a 
-                  className="flex flex-row items-center justify-between gap-4 p-2 rounded-md hover:bg-card/20"
-                  href="sms:9522884408"
-                >
-                  <h3>Phone: </h3>
-                  <p className="font-mono">(952)288-4408</p>
-                </a>
-              </li>
-              <li className="mb-2">
-                <a 
-                  className="flex flex-row items-center justify-between gap-4 p-2 rounded-md hover:bg-card/20"
-                  href="mailto:austin.t.mans@gmail.com" 
-                  target="_blank"
-                >
-                  <h3>Email: </h3>
-                  <p className="font-mono">austin.t.mans@gmail.com</p>
-                </a>
-              </li>
-              <li>
-                <a 
-                  className="flex flex-row items-center justify-between gap-4 p-2 rounded-md hover:bg-card/20"
-                  href="https://www.linkedin.com/in/austin-mans/"
-                  target="_blank"
-                >
-                  <h3>LinkedIn: </h3>
-                  <p className="font-mono">/austin-mans</p>
-                </a>
-              </li>
-            </ul>
+            <div className="block mx-auto">
+              <ul className="w-[24rem] bg-card text-secondary-foreground p-2 border-2 border-border/45 rounded-lg">
+                <li className="mb-2">
+                  <a 
+                    className="flex flex-row items-center justify-between gap-4 p-2 rounded-md hover:bg-card-foreground/5"
+                    href="sms:9522884408"
+                  >
+                    <h3>Phone: </h3>
+                    <p className="font-mono">(952)288-4408</p>
+                  </a>
+                </li>
+                <li className="mb-2">
+                  <a 
+                    className="flex flex-row items-center justify-between gap-4 p-2 rounded-md hover:bg-card-foreground/5"
+                    href="mailto:austin.t.mans@gmail.com" 
+                    target="_blank"
+                  >
+                    <h3>Email: </h3>
+                    <p className="font-mono">austin.t.mans@gmail.com</p>
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    className="flex flex-row items-center justify-between gap-4 p-2 rounded-md hover:bg-card-foreground/5"
+                    href="https://www.linkedin.com/in/austin-mans/"
+                    target="_blank"
+                  >
+                    <h3>LinkedIn: </h3>
+                    <p className="font-mono">/austin-mans</p>
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </section>
 
       </main>
 
       {/* Footer */}
-      <footer className="py-4 bg-card text-center">
+      <footer className="py-2 bg-card text-center">
         <p className="max-w-[calc(100%-40px)] text-sm text-muted-foreground">
           &copy; {new Date().getFullYear()} Austin Mans Portfolio. All rights reserved.
         </p>
