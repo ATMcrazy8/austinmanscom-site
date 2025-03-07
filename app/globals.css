@@ -35,8 +35,8 @@ body {
     --accent: var(--hue) 50% 80%;
     --accent-foreground: var(--hue) 90% 20%;
 
-    --mono: var(--hue) 0% 100%;
-    --mono-foreground: var(--hue) 0% 0%;
+    --monotone: var(--hue) 0% 99%;
+    --monotone-foreground: var(--hue) 0% 1%;
 
     --border: var(--hue) 20% 80%;
     --input: var(--hue) 20% 80%;

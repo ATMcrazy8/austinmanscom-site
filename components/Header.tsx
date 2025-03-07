@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import ThemePicker from "./ThemePicker";
 
 export default function Header() {
   const pathname = usePathname();
@@ -13,11 +14,11 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full p-4 shadow-lg bg-ring/25 backdrop-blur-lg">
-      <div className="container mx-auto flex justify-between items-center">
+    <header className="sticky top-0 z-50 flex items-center justify-center w-full py-4 shadow-lg bg-ring/25 backdrop-blur-lg">
+      <div className="flex w-full max-w-[calc(100%-40px)] justify-between items-center">
         {/* Logo Replacement */}
         <div className="flex items-center gap-2">
-          <h1 className="text-xl font-bold">Austin Mans | Web Development</h1>
+          <h1 className="text-xl font-bold">Austin Mans | Web</h1>
         </div>
 
         <nav className="flex items-center gap-4">
@@ -34,21 +35,19 @@ export default function Header() {
             >
               About
             </li>
-            <li
-              className="cursor-pointer hover:text-primary"
-              onClick={() => scrollToSection("showcase")}
-            >
-              Showcase
-            </li>
           </ul>
 
-          {/* Contact Me Button */}
+
+          <ThemePicker />
+          
+
           <button
-            className="px-4 py-2 bg-secondary text-secondary-foreground rounded-md hover:bg-accent transition-colors"
+            className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-ring transition-colors"
             onClick={() => scrollToSection("contact")}
           >
             Contact Me
           </button>
+          
         </nav>
       </div>
     </header>

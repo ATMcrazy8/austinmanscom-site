@@ -10,9 +10,9 @@ export default function WebMetricsSection() {
   return (
     <div className="flex flex-col md:flex-row w-full md:w-auto gap-8 justify-between">
       {webMetrics.map(({ title, description, icon: Icon }) => (
-        <div key={title} className="p-6 bg-secondary rounded-lg shadow flex flex-col items-start justify-start text-start gap-2">
+        <div key={title} className="p-6 bg-card rounded-lg shadow flex flex-col items-start justify-start text-start gap-2">
           <div className="flex flex-row items-center text-start gap-4">
-            <Icon className="w-4 h-4 text-primary" /> {/* Icon */}
+            <Icon className="w-5 h-5 text-primary" /> {/* Icon */}
             <h3 className="text-xl text-secondary-foreground font-bold">{title}</h3>
           </div>
           <p className="text-card-foreground">{description}</p>
