@@ -150,7 +150,7 @@ export default function Home() {
         <section id="contact" className="flex items-center justify-center min-h-[50vh] bg-monotone scroll-mt-16">
           <div className="w-[calc(100%-40px)] max-w-[1520px] flex flex-col items-center justify-between text-start gap-10">
             <div className="flex flex-col items-center text-center gap-4 text-pretty max-w-[28rem]">
-              <h2 className="text-3xl md:text-5xl font-semibold text-monotone-foreground">Let&apos;s Talk!</h2>
+              <h2 className="text-3xl md:text-5xl font-semibold text-foreground">Let&apos;s Talk!</h2>
               <p className="text-sm md:text-lg text-card-foreground mx-auto">
                 Email or text are usually best, but I can be reached at any of the following:
               </p>
