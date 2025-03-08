@@ -1,28 +1,22 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Rocket, Eye, Handshake } from "lucide-react";
+import { Rocket, Eye, Handshake, LucideIcon } from "lucide-react";
 
-const webMetrics = [
-  { 
-    title: "Boost Speed & Rank Higher", 
-    description: "A fast-loading website improves user engagement and SEO rankings, reducing bounce rates and keeping visitors on your site longer. Search engines like Google prioritize speed, making site performance a critical factor in online visibility.", 
-    icon: Rocket 
-  },
-  { 
-    title: "Maximize Your Audience", 
-    description: "Web accessibility ensures everyone, including users with disabilities, can easily navigate and engage with your content. ADA compliance isn't just ethical—it improves user experience, expands your reach, and even enhances SEO.", 
-    icon: Eye 
-  },
-  { 
-    title: "Design That Captivates", 
-    description: "A visually appealing, user-friendly website builds trust and keeps visitors exploring. Engaging layouts, intuitive navigation, and interactive elements turn casual visitors into loyal customers.", 
-    icon: Handshake 
-  },
+type WebMetric = {
+  title: string;
+  description: string;
+  icon: LucideIcon; // Explicitly define the type for icons
+};
+
+const webMetrics: WebMetric[] = [
+  { title: "Boost Speed & Rank Higher", description: "A fast-loading website improves user engagement and SEO rankings, reducing bounce rates and keeping visitors on your site longer. Search engines like Google prioritize speed, making site performance a critical factor in online visibility.", icon: Rocket },
+  { title: "Maximize Your Audience", description: "Web accessibility ensures everyone, including users with disabilities, can easily navigate and engage with your content. ADA compliance isn't just ethical—it improves user experience, expands your reach, and even enhances SEO.", icon: Eye },
+  { title: "Design That Captivates", description: "A visually appealing, user-friendly website builds trust and keeps visitors exploring. Engaging layouts, intuitive navigation, and interactive elements turn casual visitors into loyal customers.", icon: Handshake },
 ];
 
 // ✅ Single Web Metric Component
-const WebMetricItem = ({ title, description, icon: Icon, index }: { title: string; description: string; icon: any; index: number }) => {
+const WebMetricItem = ({ title, description, icon: Icon, index }: { title: string; description: string; icon: LucideIcon; index: number }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 100 }}  // Start hidden & off-screen
