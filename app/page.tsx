@@ -82,11 +82,11 @@ export default function Home() {
 
           <div className="flex flex-col items-center w-full max-w-[calc(100%-40px)] z-10">
             <h1 className="text-3xl md:text-5xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-monotone-foreground via-card-foreground to-monotone-foreground pb-1 text-balance">
-              Crafting Modern Web Experiences
+              Modern Web Development &amp; Design
             </h1>
-            <p className="max-w-[99.24%] sm:max-w-[88.5%] text-balance text-sm md:text-xl text-foreground/80 mb-8">
-              Custom fast, accessible, and responsive websites that leave an impression.
-            </p>
+            <i className="max-w-[99.24%] sm:max-w-[88.5%] text-balance text-xs md:text-base text-foreground/80 mb-8">
+              Custom web development services for fast, accessible, and SEO-friendly websites that drive engagement.
+            </i>
             {/* <button
               onClick={() => document.getElementById("showcase")?.scrollIntoView({ behavior: "smooth" })}
               className="px-6 py-3 bg-primary text-primary-foreground rounded-lg shadow-lg hover:bg-ring transition-colors">
@@ -129,18 +129,40 @@ export default function Home() {
           <div className="w-[calc(100%-40px)] max-w-[1520px] flex flex-col items-center justify-center mx-auto text-center gap-8">
             <WebMetricsSection />
             
-            <div className="w-full flex flex-col items-start shadow text-start p-6 bg-card rounded-lg gap-4">
-              <h2 className="text-3xl text-monotone-foreground/85 font-semibold">Prioritizing Your Web Presence Matters</h2>
+            <div className="w-full flex flex-col items-start shadow text-start p-6 bg-card rounded-lg gap-2">
+              <h2 className="text-3xl text-monotone-foreground font-semibold">Prioritizing Your Web Presence: <i className="text-card-foreground">Why It Matters</i></h2>
               <div className="flex flex-col items-start text-base/[1.4rem] text-card-foreground gap-8">
                 <p>
-                  A well-designed website is more than just aesthetics—it&apos;s about performance, accessibility, and a seamless user experience. In a world where attention spans are short, slow load times, poor navigation, or clashing colors can be the difference between gaining a customer or losing them to the &apos;back&apos; button.
+                  A well-designed website is more than just <b>visual appeal</b>—it&apos;s the foundation of your <b>brand&apos;s online success</b>. Performance, accessibility, and user experience <b>directly influence customer retention and SEO rankings</b>.
                 </p>
-                <p>
-                  Beyond user experience, a strong web presence directly impacts search rankings. Many businesses, especially smaller ones, struggle with SEO because it&apos;s complex, time-consuming, and often expensive. But neglecting it means missing out on potential customers who never find you in the first place.
-                </p>
-                <p>
-                  If your site needs a refresh, an upgrade, or just a few strategic improvements, don&apos;t waste time guessing—I can help you optimize your site to meet both user expectations and business goals. Let&apos;s build something that works.
-                </p>
+                <div>
+                  <h3 className="text-lg font-medium text-foreground">Site Speed &amp; Performance:</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Users expect pages to load in <b>under 3 seconds</b>. Any delay leads to lost conversions and a lower ranking in Google&apos;s search results.
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-lg font-medium text-foreground">SEO &amp; Discoverability:</h3>
+                  <p className="text-sm text-muted-foreground">
+                    A strong web presence ensures <b>search engines rank your site higher</b>, bringing in new customers. Without <b>proper SEO</b>, your business risks being invisible online.
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-lg font-medium text-foreground">User Experience &amp; Retention:</h3>
+                  <p className="text-sm text-muted-foreground">
+                    A poorly designed site—confusing navigation, slow load times, or clashing colors—can push visitors away in <b>seconds</b>. Good design naturally encourages engagement, trust, and conversions.
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-lg font-medium text-foreground">Smart Web Strategies for Growth:</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Whether your site needs a <b>redesign, optimization, or small tweaks</b>, I help businesses build high-performance websites that <b>stand out, rank higher, and drive results</b>.
+                  </p>
+                </div>
+
+                <b>
+                Let&apos;s build a site that works for you!
+                </b>
               </div>
             </div>
           </div>
@@ -148,11 +170,11 @@ export default function Home() {
 
         {/* Contact Section */}
         <section id="contact" className="flex items-center justify-center min-h-[50vh] bg-monotone scroll-mt-16">
-          <div className="w-[calc(100%-40px)] max-w-[1520px] flex flex-col items-center justify-between text-start gap-10">
+          <div className="w-[calc(100%-40px)] max-w-[1520px] py-12 flex flex-col items-center justify-between text-start gap-10">
             <div className="flex flex-col items-center text-center gap-4 text-pretty max-w-[28rem]">
-              <h2 className="text-3xl md:text-5xl font-semibold text-foreground">Let&apos;s Talk!</h2>
+              <h2 className="text-3xl md:text-5xl font-semibold text-foreground">Still Here?</h2>
               <p className="text-sm md:text-lg text-card-foreground mx-auto">
-                Email or text are usually best, but I can be reached at any of the following:
+                Let&apos;s Chat. Email or text are usually best, but I can be reached at any of the following:
               </p>
             </div>
             <div className="block w-full max-w-[28rem] mx-auto">
