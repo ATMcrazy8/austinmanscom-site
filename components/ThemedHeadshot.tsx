@@ -24,7 +24,7 @@ export default function ThemedHeadshot() {
         src="/AustinMansHeadshot.jpg"
         width={240}
         height={240}
-        alt="Headshot of myself, the site author, Austin Mans"
+        alt="Austin Mans - Web Developer based in Hudson, WI"
         style={{ filter: `sepia(100%) hue-rotate(${hueRotateValue}deg)` }}
       />
     </div>

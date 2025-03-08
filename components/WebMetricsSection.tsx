@@ -5,9 +5,9 @@ import { useRef } from "react";
 import { Rocket, Eye, Handshake } from "lucide-react";
 
 const webMetrics = [
-  { title: "Performance", description: "Fast-loading sites keep users engaged and improve SEO.", icon: Rocket },
-  { title: "Accessibility", description: "Reach more users by ensuring everyone can access your content.", icon: Eye },
-  { title: "Engagement", description: "Beautiful, intuitive design keeps users exploring your site longer.", icon: Handshake },
+  { title: "Boost Speed & Rank Higher", description: "A fast-loading website improves user engagement and SEO rankings, reducing bounce rates and keeping visitors on your site longer. Search engines like Google prioritize speed, making site performance a critical factor in online visibility.", icon: Rocket },
+  { title: "Maximize Your Audience", description: "Web accessibility ensures everyone, including users with disabilities, can easily navigate and engage with your content. ADA compliance isn't just ethical—it improves user experience, expands your reach, and even enhances SEO.", icon: Eye },
+  { title: "Design That Captivates", description: "A visually appealing, user-friendly website builds trust and keeps visitors exploring. Engaging layouts, intuitive navigation, and interactive elements turn casual visitors into loyal customers.", icon: Handshake },
 ];
 
 export default function WebMetricsSection() {
@@ -39,7 +39,7 @@ export default function WebMetricsSection() {
       initial="hidden"
       whileInView="show"
       viewport={{ once: false, amount: 0.5 }} // Trigger when 50% visible
-      className="flex flex-col md:flex-row w-full md:w-auto gap-8 justify-between overflow-hidden"
+      className="flex flex-col lg:flex-row w-full lg:w-auto gap-8 justify-between overflow-hidden"
     >
       {webMetrics.map(({ title, description, icon: Icon }) => (
         <motion.div
