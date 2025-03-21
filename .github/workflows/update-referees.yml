@@ -1,0 +1,33 @@
+name: Update Referee Data
+
+on:
+  schedule:
+    - cron: "0 0 * * *"  # Runs every day at midnight UTC
+  workflow_dispatch:  # Allows manual triggering from GitHub Actions UI
+
+jobs:
+  update_data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set Up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Update Script
+        run: node scripts/updateReferees.js
+
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.email "github-actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add data/referees.json
+          git commit -m "Automated referee data update" || exit 0  # Prevent failure if no changes
+          git push
