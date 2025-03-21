@@ -22,7 +22,7 @@ jobs:
         run: npm install
 
       - name: Run Update Script
-        run: node scripts/updateReferees.js
+        run: node scripts/updateReferees.mjs
 
       - name: Commit and Push Changes
         run: |
