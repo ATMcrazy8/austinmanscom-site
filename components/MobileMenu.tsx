@@ -34,7 +34,7 @@ export default function MobileMenu() {
       {/* Sidebar Menu Content */}
       <SheetContent
         side="right"
-        className="w-full sm:w-96 bg-background shadow-lg"
+        className="w-full sm:w-96 bg-background shadow-lg overflow-y-auto"
       >
         {/* Navigation Links */}
         <nav className="flex flex-col mt-12">

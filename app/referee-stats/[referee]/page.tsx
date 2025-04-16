@@ -99,21 +99,61 @@ export default async function RefereePage({ params }: PageProps) {
   const statsToShow: {
     label: string;
     key: keyof typeof averages;
+    context: string;
     isPercent?: boolean;
   }[] = [
-    { label: "Goals per Game", key: "goalsPerGame" },
-    { label: "Power Play Opportunities", key: "ppOpportunities" },
-    { label: "Minors per Game", key: "minorsPerGame" },
-    { label: "Penalties per Game", key: "penaltiesPerGame" },
-    { label: "PIM per Game", key: "pimPerGame" },
-    { label: "Penalty Home %", key: "penaltyHomePercentage", isPercent: true },
-    { label: "Avg Penalty Diff", key: "avgPenaltyDiff" },
-    { label: "Home Win %", key: "homeWinPercentage", isPercent: true },
-    { label: "Games to OT %", key: "gamesToOT", isPercent: true },
+    { 
+      label: "Goals per Game",
+      key: "goalsPerGame",
+      context: "The average number of total goals scored in games officiated by this referee. Rank #1 means this ref's games are the highest scoring in the NHL."
+    },
+    { 
+      label: "Power Play Opportunities",
+      key: "ppOpportunities",
+      context: "The average number of power plays awarded per game by this referee. Rank #1 indicates this official calls the most power play chances in the league."
+    },
+    { 
+      label: "Minors per Game",
+      key: "minorsPerGame",
+      context: "The average number of minor penalties assessed per game. Rank #1 means this ref calls more minors per game than any other NHL official."
+    },
+    { 
+      label: "Penalties per Game",
+      key: "penaltiesPerGame",
+      context: "The total number of penalties assessed per game, including minors, majors, and misconducts. Rank #1 means this ref calls the most penalties overall."
+    },
+    { 
+      label: "PIM per Game",
+      key: "pimPerGame",
+      context: "Penalty minutes assessed per game. Since penalties vary in length (2, 5, or 10 minutes), this stat gives a weighted view of how strict the ref is. Rank #1 means the highest total PIM per game."
+    },
+    { 
+      label: "Penalty Home %",
+      key: "penaltyHomePercentage",
+      context: "The percentage of total penalties assessed against the home team. Rank #1 means home teams receive the most penalties under this official. This stat may suggest bias but isn’t definitive.",
+      isPercent: true
+    },
+    { 
+      label: "Avg Penalty Diff",
+      key: "avgPenaltyDiff",
+      context: "The average absolute difference in penalties between the two teams in a game. Rank #1 indicates the largest discrepancy in calls between teams — the higher the number, the less even the officiating."
+    },
+    { 
+      label: "Home Win %",
+      key: "homeWinPercentage",
+      context: "The percentage of games in which the home team wins when officiated by this referee. Rank #1 means home teams win most often under this official.",
+      isPercent: true
+    },
+    { 
+      label: "Games to OT %",
+      key: "gamesToOT",
+      context: "The percentage of games that go to overtime with this referee. Rank #1 indicates this ref has the highest rate of games going beyond regulation.",
+      isPercent: true
+    },
   ];
 
   return (
-    <div className="w-[calc(100%-40px)] max-w-[1520px] mx-auto p-6">
+    <div className="w-[calc(100%-40px)] max-w-[1520px] mx-auto py-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
         <div className="flex items-center space-x-4">
           <div className="w-24 sm:w-32 md:w-40 aspect-square relative">
@@ -126,10 +166,10 @@ export default async function RefereePage({ params }: PageProps) {
           </div>
           <div className="flex flex-col gap-0">
             <div className="flex items-center justify-start w-full">
-              <p className="flex items-top gap-1 text-xl font-medium text-secondary-foreground">
+              <div className="flex items-top text-xl font-medium text-secondary-foreground">
                 <span className="text-xs">#</span>
                 {refData.refNumber}
-              </p>
+              </div>
             </div>
             <h1>
               <span className="text-lg leading-none font-light text-primary">{firstName}</span>
@@ -145,9 +185,9 @@ export default async function RefereePage({ params }: PageProps) {
       </div>
 
       <div className="mt-8">
-        <h2 className="text-xl font-semibold mb-4">Stat Comparison</h2>
+        <h2 className="text-xl font-semibold mb-4">Stat Breakdown</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {statsToShow.map(({ label, key, isPercent }) => {
+          {statsToShow.map(({ label, key, context, isPercent }) => {
             const refVal =
               typeof refData[key] === "string"
                 ? parseFloat(refData[key])
@@ -158,7 +198,7 @@ export default async function RefereePage({ params }: PageProps) {
             return (
               <div
                 key={key}
-                className="p-4 border rounded-xl bg-card shadow-sm hover:shadow-md transition duration-150"
+                className="p-4 border rounded-xl bg-card shadow-sm hover:shadow-md hover:scale-[1.02] transition duration-150"
               >
                 <h3 className="font-semibold text-card-foreground mb-1">
                   {label}
@@ -177,7 +217,11 @@ export default async function RefereePage({ params }: PageProps) {
                 </p>
                 <p className="flex justify-between w-full text-sm text-muted-foreground">
                   Rank:
-                  <span><span className="font-semibold text-foreground"> #{rank}</span>/{referees.length}</span>
+                  <span><span className="font-semibold text-foreground"> #{rank}</span> /{referees.length}</span>
+                </p>
+                <p className="flex flex-col py-2 w-full text-sm text-muted-foreground font-normal">
+                  Context:
+                  <span className="text-foreground text-xs">{context}</span>
                 </p>
               </div>
             );
