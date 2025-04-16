@@ -84,6 +84,7 @@ export default async function RefereePage({ params }: PageProps) {
   const refereeSlug = referee;
   const refData = referees.find((ref) => slugify(ref.name) === refereeSlug);
   if (!refData) return notFound();
+  const [lastName, firstName] = refData.name.split(",").map((s) => s.trim());
 
   const photoPath = path.join(
     process.cwd(),
@@ -123,9 +124,18 @@ export default async function RefereePage({ params }: PageProps) {
               className="rounded-full object-cover"
             />
           </div>
-          <div>
-            <h1 className="text-2xl font-bold">{refData.name}</h1>
-            <p>Referee #{refData.refNumber}</p>
+          <div className="flex flex-col gap-0">
+            <div className="flex items-center justify-start w-full">
+              <p className="flex items-top gap-1 text-xl font-medium text-secondary-foreground">
+                <span className="text-xs">#</span>
+                {refData.refNumber}
+              </p>
+            </div>
+            <h1>
+              <span className="text-lg leading-none font-light text-primary">{firstName}</span>
+              <br />
+              <span className="text-3xl leading-6 font-bold text-primary">{lastName}</span></h1>
+            <p className="text-md leading-4 text-muted-foreground mt-2">{refData.totalGames} Games</p>
           </div>
         </div>
 
@@ -153,21 +163,21 @@ export default async function RefereePage({ params }: PageProps) {
                 <h3 className="font-semibold text-card-foreground mb-1">
                   {label}
                 </h3>
-                <p className="text-sm text-muted-foreground">
-                  Ref's Stat:{" "}
-                  <span className="text-foreground font-medium">
+                <p className="flex justify-between w-full text-sm text-muted-foreground font-normal">
+                  Individual:{" "}
+                  <span className="text-foreground font-semibold">
                     {isPercent ? formatPercent(refVal) : refVal}
                   </span>
                 </p>
-                <p className="text-sm text-muted-foreground">
+                <p className="flex justify-between w-full text-sm text-muted-foreground font-normal">
                   League Avg:{" "}
-                  <span className="font-medium">
+                  <span className="font-semibold text-foreground">
                     {isPercent ? formatPercent(leagueAvg) : leagueAvg}
                   </span>
                 </p>
-                <p className="text-sm text-muted-foreground">
-                  Rank: <span className="font-medium">#{rank}</span> out of{" "}
-                  {referees.length}
+                <p className="flex justify-between w-full text-sm text-muted-foreground">
+                  Rank:
+                  <span><span className="font-semibold text-foreground"> #{rank}</span>/{referees.length}</span>
                 </p>
               </div>
             );
