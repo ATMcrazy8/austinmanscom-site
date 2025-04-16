@@ -60,13 +60,14 @@ const parsePercent = (val: string) => parseFloat(val.replace("%", ""));
 
 export default function RefereeRadar({ referee }: { referee: Referee }) {
   const { theme } = useTheme();
-  const [colors, setColors] = useState({ primary: "", mutedForeground: "" });
+  const [colors, setColors] = useState({ primary: "", monotoneForeground: "", mutedForeground: "" });
 
   useEffect(() => {
     const updateColors = () => {
       const styles = getComputedStyle(document.documentElement);
       setColors({
         primary: styles.getPropertyValue("--primary").trim(),
+        monotoneForeground: styles.getPropertyValue("--monotone-foreground").trim(),
         mutedForeground: styles.getPropertyValue("--muted-foreground").trim(),
       });
     };
@@ -89,33 +90,33 @@ export default function RefereeRadar({ referee }: { referee: Referee }) {
   const data: RadarStat[] = [
     {
       stat: "Goals/Game",
-      refValue: (referee.goalsPerGame / 10) * 100,
-      leagueAvg: (leagueAverage.goalsPerGame / 10) * 100,
+      refValue: (referee.goalsPerGame / 8) * 100,
+      leagueAvg: (leagueAverage.goalsPerGame / 8) * 100,
     },
     {
       stat: "PP Opp/Game",
-      refValue: (referee.ppOpportunities / 5) * 100,
-      leagueAvg: (leagueAverage.ppOpportunities / 5) * 100,
+      refValue: (referee.ppOpportunities / 4) * 100,
+      leagueAvg: (leagueAverage.ppOpportunities / 4) * 100,
     },
     {
       stat: "Penalties/Game",
-      refValue: (referee.penaltiesPerGame / 6) * 100,
-      leagueAvg: (leagueAverage.penaltiesPerGame / 6) * 100,
+      refValue: (referee.penaltiesPerGame / 4.8) * 100,
+      leagueAvg: (leagueAverage.penaltiesPerGame / 4.8) * 100,
     },
     {
       stat: "Penalty Diff",
-      refValue: (referee.avgPenaltyDiff / 2.5) * 100,
-      leagueAvg: (leagueAverage.avgPenaltyDiff / 2.5) * 100,
+      refValue: (referee.avgPenaltyDiff / 2) * 100,
+      leagueAvg: (leagueAverage.avgPenaltyDiff / 2) * 100,
     },
     {
       stat: "Home Win %",
-      refValue: parsePercent(referee.homeWinPercentage),
-      leagueAvg: parsePercent(leagueAverage.homeWinPercentage),
+      refValue: parsePercent(referee.homeWinPercentage) / 80 * 100,
+      leagueAvg: parsePercent(leagueAverage.homeWinPercentage) / 80 * 100,
     },
     {
       stat: "OT %",
-      refValue: parsePercent(referee.gamesToOT) * 2,
-      leagueAvg: parsePercent(leagueAverage.gamesToOT) * 2,
+      refValue: parsePercent(referee.gamesToOT) / 40 * 100,
+      leagueAvg: parsePercent(leagueAverage.gamesToOT) / 40 * 100,
     },
   ];
 
@@ -137,11 +138,11 @@ export default function RefereeRadar({ referee }: { referee: Referee }) {
               const max = maxRange[statKey];
 
               return (
-                <div className="bg-white border border-gray-300 rounded-md p-2 text-xs">
-                  <p className="font-semibold">{statName}</p>
-                  <p className="text-secondary-foreground">Ref: {rawValue}</p>
+                <div className="bg-card border border-accent rounded-md p-2 text-xs">
+                  <p className="font-semibold text-card-foreground">{statName}</p>
+                  <p className="text-secondary-foreground">Individual: {rawValue}</p>
                   <p className="text-secondary-foreground">
-                    League Avg: {leagueValue}
+                    League: {leagueValue}
                   </p>
                   <p className="text-secondary-foreground">
                     Graph Display: 0 - {max}
@@ -150,7 +151,7 @@ export default function RefereeRadar({ referee }: { referee: Referee }) {
               );
             }}
           />
-          <PolarGrid />
+          <PolarGrid stroke={`hsl(${colors.mutedForeground})`} strokeOpacity={0.3}/>
           <PolarAngleAxis dataKey="stat" />
           <PolarRadiusAxis
             angle={30}
@@ -162,16 +163,17 @@ export default function RefereeRadar({ referee }: { referee: Referee }) {
           <Radar
             name="League Avg"
             dataKey="leagueAvg"
-            stroke={`hsl(${colors.mutedForeground})`}
-            fill={`hsl(${colors.mutedForeground})`}
-            fillOpacity={0.05}
+            stroke={`hsl(${colors.monotoneForeground})`}
+            fill={`hsl(${colors.monotoneForeground})`}
+            strokeOpacity={0.6}
+            fillOpacity={0.1}
           />
           <Radar
             name="Ref"
             dataKey="refValue"
             stroke={`hsl(${colors.primary})`}
             fill={`hsl(${colors.primary})`}
-            fillOpacity={0.6}
+            fillOpacity={0.15}
           />
         </RadarChart>
       </ResponsiveContainer>

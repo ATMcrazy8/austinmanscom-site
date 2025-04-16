@@ -1,11 +1,13 @@
 import referees from "@/data/referees.json";
 
 function round(value: number, decimals = 2): number {
-    return parseFloat(value.toFixed(decimals));
+  return parseFloat(value.toFixed(decimals));
 }
 
 export function getLeagueAverage() {
-  const validRefs = referees.filter(ref => ref.name !== "Unknown" && ref.name !== "NHL Average");
+  const validRefs = referees.filter(
+    (ref) => ref.name !== "Unknown" && ref.name !== "NHL Average"
+  );
   const totalRefs = validRefs.length;
 
   const sum = validRefs.reduce(
@@ -14,7 +16,9 @@ export function getLeagueAverage() {
       acc.ppOpportunities += ref.ppOpportunities;
       acc.penaltiesPerGame += ref.penaltiesPerGame;
       acc.avgPenaltyDiff += ref.avgPenaltyDiff;
-      acc.homeWinPercentage += parseFloat(ref.homeWinPercentage.replace("%", ""));
+      acc.homeWinPercentage += parseFloat(
+        ref.homeWinPercentage.replace("%", "")
+      );
       acc.gamesToOT += parseFloat(ref.gamesToOT.replace("%", ""));
       return acc;
     },

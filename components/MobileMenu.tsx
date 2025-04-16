@@ -1,12 +1,22 @@
 "use client";
 
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetClose,
+} from "@/components/ui/sheet";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
 import { Menu } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTheme } from "@/app/context/ThemeProvider";
 
-const themes = ["mint", "ocean", "meadow", "lava", "space"];
+const themes = ["mint", "ocean", "ultraviolet", "pink", "heat", "goldenrod"];
 
 export default function MobileMenu() {
   const router = useRouter();
@@ -22,11 +32,12 @@ export default function MobileMenu() {
       </SheetTrigger>
 
       {/* Sidebar Menu Content */}
-      <SheetContent side="right" className="w-full sm:w-96 bg-background shadow-lg">
-        
+      <SheetContent
+        side="right"
+        className="w-full sm:w-96 bg-background shadow-lg"
+      >
         {/* Navigation Links */}
         <nav className="flex flex-col mt-12">
-
           {/* Home Button */}
           <SheetClose asChild>
             <button
@@ -39,13 +50,14 @@ export default function MobileMenu() {
 
           {/* Navigation Accordion */}
           <Accordion type="single" collapsible className="w-full px-2">
-
             {/* Projects Section */}
             <AccordionItem value="projects">
-              <AccordionTrigger className="text-lg text-foreground font-semibold">Projects</AccordionTrigger>
+              <AccordionTrigger className="text-lg text-foreground font-semibold">
+                Projects
+              </AccordionTrigger>
               <AccordionContent className="flex flex-col gap-2">
                 <SheetClose asChild>
-                  <button 
+                  <button
                     className="w-full text-left px-4 py-2 hover:text-primary hover:bg-muted/20 transition-colors rounded-md"
                     onClick={() => router.push("/referee-stats")}
                   >
@@ -57,15 +69,18 @@ export default function MobileMenu() {
 
             {/* Theme Section */}
             <AccordionItem value="theme">
-              <AccordionTrigger className="text-lg text-foreground font-semibold">Theme</AccordionTrigger>
+              <AccordionTrigger className="text-lg text-foreground font-semibold">
+                Theme
+              </AccordionTrigger>
               <AccordionContent className="flex flex-col gap-2">
-                
                 {/* Theme Options (No SheetClose - Keeps the menu open) */}
                 {themes.map((themeName) => (
                   <button
                     key={themeName}
                     className={`w-full text-left px-4 py-2 hover:text-primary hover:bg-muted/20 transition-colors rounded-md ${
-                      theme === themeName ? "bg-primary text-primary-foreground" : "text-foreground"
+                      theme === themeName
+                        ? "bg-primary text-primary-foreground"
+                        : "text-foreground"
                     }`}
                     onClick={() => setTheme(themeName)} // Switches theme but keeps menu open
                   >
@@ -87,10 +102,8 @@ export default function MobileMenu() {
                     <span className="absolute left-1 top-1 w-4 h-4 bg-background rounded-full transition-transform peer-checked:translate-x-5"></span>
                   </label>
                 </div>
-
               </AccordionContent>
             </AccordionItem>
-
           </Accordion>
 
           {/* Contact Button (Closes the Sheet) */}
@@ -102,7 +115,6 @@ export default function MobileMenu() {
               Contact Me
             </button>
           </SheetClose>
-
         </nav>
       </SheetContent>
     </Sheet>
