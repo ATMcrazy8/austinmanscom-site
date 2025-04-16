@@ -29,7 +29,7 @@ It's built to showcase my skills through thoughtful design and personal projects
 
 ---
 
-## 🏒 Referee Analytics
+## 🏒 Dynamic Referee Analytics
 
 The first featured project on this site is dedicated to tracking NHL referee trends and patterns.
 
