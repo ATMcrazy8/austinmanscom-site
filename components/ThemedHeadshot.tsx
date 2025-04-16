@@ -8,11 +8,12 @@ export default function ThemedHeadshot() {
 
   // Retrieve the hue value from the theme
   const themes: Record<string, number> = {
-    mint: 150,
+    mint: 160,
     ocean: 190,
-    meadow: 85,
-    lava: 360,
-    space: 280,
+    ultraviolet: 265,
+    pink: 330,
+    heat: 360,
+    goldenrod: 50,
   };
 
   const hue = themes[theme] ?? 150; // Default to mint (150) if undefined

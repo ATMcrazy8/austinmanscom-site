@@ -44,10 +44,10 @@ export default {
           DEFAULT: "hsl(var(--monotone))",
           foreground: "hsl(var(--monotone-foreground))",
         },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
+		anti: {
+		  DEFAULT: "hsl(var(--anti-primary))",
+		  foreground: "hsl(var(--anti-primary-foreground))",
+		},
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

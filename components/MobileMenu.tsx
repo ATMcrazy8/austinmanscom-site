@@ -16,7 +16,7 @@ import { Menu } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTheme } from "@/app/context/ThemeProvider";
 
-const themes = ["mint", "ocean", "meadow", "lava", "space"];
+const themes = ["mint", "ocean", "ultraviolet", "pink", "heat", "goldenrod"];
 
 export default function MobileMenu() {
   const router = useRouter();

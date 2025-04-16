@@ -9,11 +9,12 @@ type ThemeConfig = {
 
 // Define themes
 const themes: Record<string, ThemeConfig> = {
-  mint: { hue: 150 },
+  mint: { hue: 160 },
   ocean: { hue: 190 },
-  meadow: { hue: 85 },
-  lava: { hue: 360 },
-  space: { hue: 280 },
+  ultraviolet: { hue: 265 },
+  pink: { hue: 330 },
+  heat: { hue: 360 },
+  goldenrod: { hue: 50 },
 };
 
 // Create Context

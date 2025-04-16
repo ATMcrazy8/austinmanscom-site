@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useTheme } from "@/app/context/ThemeProvider";
 import { ChevronDown } from "lucide-react";
 
-const themes = ["mint", "ocean", "meadow", "lava", "space"];
+const themes = ["mint", "ocean", "ultraviolet", "pink", "heat", "goldenrod"];
 
 export default function ThemePicker() {
   const { theme, setTheme, isDarkMode, toggleDarkMode } = useTheme();
