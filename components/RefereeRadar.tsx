@@ -37,7 +37,7 @@ type StatLabel =
   | "Home Win %"
   | "OT %";
 
-  type StatKey =
+type StatKey =
   | "goalsPerGame"
   | "ppOpportunities"
   | "penaltiesPerGame"
@@ -53,16 +53,6 @@ const statKeyMap: Record<StatLabel, StatKey> = {
   "Home Win %": "homeWinPercentage",
   "OT %": "gamesToOT",
 };
-
-const maxRange: Record<StatKey, number> = {
-  goalsPerGame: 8,
-  ppOpportunities: 4,
-  penaltiesPerGame: 4.8,
-  avgPenaltyDiff: 2,
-  homeWinPercentage: 80,
-  gamesToOT: 35,
-};
-
 
 
 const parsePercent = (val: string) => parseFloat(val.replace("%", ""));
