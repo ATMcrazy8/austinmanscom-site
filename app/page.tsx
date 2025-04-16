@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "@/app/context/ThemeProvider";
-import ThemedHeadshot from "@/components/ThemedHeadshot";
+import AboutSection from "@/components/AboutSection";
 import BackgroundStripes from "@/components/BackgroundStripes";
 import WebMetricsSection from "@/components/WebMetricsSection";
 
@@ -36,34 +36,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-16 bg-monotone scroll-mt-16">
-        <div className="max-w-[calc(100%-40px)] flex flex-col md:flex-row container items-center justify-center mx-auto text-start gap-12">
-          <ThemedHeadshot />
-
-          <div>
-            <h2 className="text-3xl font-semibold mb-4">A Bit About Me</h2>
-            <p className="text-lg text-card-foreground max-w-3xl mx-auto mb-4">
-              Hello! I&apos;m Austin. I am a web developer based in Hudson, WI.
-              I build modern, responsive websites that look great and function
-              flawlessly across devices.
-            </p>
-            <p className="text-lg text-card-foreground max-w-3xl mx-auto mb-4">
-              Whether you need a refresh, an upgrade, or a brand-new site, I can
-              help. Let&apos;s create something that works for you.
-            </p>
-            <p className="w-auto text-lg text-card-foreground max-w-3xl mx-auto">
-              If your website needs a lift,
-              <a
-                href="#contact"
-                className="text-ring underline px-[4px] mx-[2px] rounded-sm"
-              >
-                reach out
-              </a>
-              and let&apos;s get started.
-            </p>
-          </div>
-        </div>
-      </section>
+      <AboutSection />
 
       {/* Why Web Matters Section */}
       <section className="flex items-center justify-center py-16 min-h-[100vh] backdrop-blur-xl bg-gradient-to-r from-ring/60 via-ring/40 via-20% to-ring/10">

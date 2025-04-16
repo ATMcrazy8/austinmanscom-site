@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { slugify } from "@/lib/slugify";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+
 
 type Referee = {
   id: number;
@@ -57,7 +59,16 @@ export default function RefereeStats() {
   });
 
   if (loading)
-    return <p className="text-center text-lg">Loading referees...</p>;
+    return (
+      <div className="flex items-center justify-center h-[80vh] w-full">
+        <div className="flex flex-col items-center gap-4 animate-pulse text-muted-foreground">
+          <div className="h-12 w-12 border-4 border-t-transparent border-primary rounded-full animate-spin" />
+          <p className="text-sm">Loading referees…</p>
+          {/* Optional tagline */}
+          <p className="text-xs text-muted-foreground italic">Corralling the zebras...</p>
+        </div>
+      </div>
+    );
 
   return (
     <div className="flex flex-col items-center gap-4 p-8 w-full">
@@ -100,8 +111,13 @@ export default function RefereeStats() {
         {sortedReferees.map((ref) => {
           const slug = slugify(ref.name);
           return (
-            <li
+            <motion.li
               key={ref.id}
+              initial={{ opacity: 0, scale: 0.98 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              whileHover={{ opacity: 1, scale: 1.02 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.15, ease: "easeOut" }}
               className="flex flex-row items-center justify-start border rounded-lg shadow-md bg-gradient-to-br from-secondary to-70% to-monotone hover:scale-[1.02] hover:shadow-lg hover:border-primary duration-150"
             >
               <Link
@@ -146,7 +162,7 @@ export default function RefereeStats() {
                   </div>
                 </div>
               </Link>
-            </li>
+            </motion.li>
           );
         })}
       </ul>
