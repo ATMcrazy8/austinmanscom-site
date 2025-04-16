@@ -37,7 +37,7 @@ async function scrapeRefereeData() {
           totalGames: parseInt(cells[2]?.innerText.trim()) || 0,
           goalsPerGame: parseFloat(cells[3]?.innerText.trim()) || 0,
           ppOpportunities: parseFloat(cells[4]?.innerText.trim()) || 0,
-          minutesPerGame: parseFloat(cells[5]?.innerText.trim()) || 0,
+          minorsPerGame: parseFloat(cells[5]?.innerText.trim()) || 0,
           penaltiesPerGame: parseFloat(cells[6]?.innerText.trim()) || 0,
           pimPerGame: parseFloat(cells[7]?.innerText.trim()) || 0,
           penaltyHomePercentage: cells[8]?.innerText.trim(),

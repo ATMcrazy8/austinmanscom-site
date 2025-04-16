@@ -19,7 +19,7 @@ function calculateAverages(data: typeof referees) {
   const totals = {
     goalsPerGame: 0,
     ppOpportunities: 0,
-    minutesPerGame: 0,
+    minorsPerGame: 0,
     penaltiesPerGame: 0,
     pimPerGame: 0,
     penaltyHomePercentage: 0,
@@ -31,7 +31,7 @@ function calculateAverages(data: typeof referees) {
   data.forEach((ref) => {
     totals.goalsPerGame += ref.goalsPerGame;
     totals.ppOpportunities += ref.ppOpportunities;
-    totals.minutesPerGame += ref.minutesPerGame;
+    totals.minorsPerGame += ref.minorsPerGame;
     totals.penaltiesPerGame += ref.penaltiesPerGame;
     totals.pimPerGame += ref.pimPerGame;
     totals.penaltyHomePercentage += parseFloat(ref.penaltyHomePercentage);
@@ -44,7 +44,7 @@ function calculateAverages(data: typeof referees) {
   return {
     goalsPerGame: +(totals.goalsPerGame / divisor).toFixed(2),
     ppOpportunities: +(totals.ppOpportunities / divisor).toFixed(2),
-    minutesPerGame: +(totals.minutesPerGame / divisor).toFixed(2),
+    minorsPerGame: +(totals.minorsPerGame / divisor).toFixed(2),
     penaltiesPerGame: +(totals.penaltiesPerGame / divisor).toFixed(2),
     pimPerGame: +(totals.pimPerGame / divisor).toFixed(2),
     penaltyHomePercentage: +(totals.penaltyHomePercentage / divisor).toFixed(2),
@@ -87,7 +87,7 @@ export default async function RefereePage({ params }: PageProps) {
     const statsToShow: { label: string; key: keyof typeof averages; isPercent?: boolean }[] = [
         { label: "Goals per Game", key: "goalsPerGame" },
         { label: "Power Play Opportunities", key: "ppOpportunities" },
-        { label: "Minutes per Game", key: "minutesPerGame" },
+        { label: "Minors per Game", key: "minorsPerGame" },
         { label: "Penalties per Game", key: "penaltiesPerGame" },
         { label: "PIM per Game", key: "pimPerGame" },
         { label: "Penalty Home %", key: "penaltyHomePercentage", isPercent: true },
