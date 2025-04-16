@@ -2,6 +2,7 @@
 
 import { ThemeProvider } from "./context/ThemeProvider";
 import Header from "@/components/Header";
+import SiteFooter from "@/components/Footer";
 import { Inter, Space_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -53,6 +54,7 @@ export default function RootLayout({
         <ThemeProvider>
           <Header />
           {children}
+          <SiteFooter />
         </ThemeProvider>
       </body>
     </html>
