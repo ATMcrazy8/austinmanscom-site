@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "@/app/context/ThemeProvider";
-import ThemedHeadshot from "@/components/ThemedHeadshot";
+import AboutSection from "@/components/AboutSection";
 import BackgroundStripes from "@/components/BackgroundStripes";
 import WebMetricsSection from "@/components/WebMetricsSection";
 
@@ -12,13 +12,11 @@ export default function Home() {
 
   return (
     <main className="min-h-screen text-foreground bg-background transition-colors duration-500">
-
       {/* Top Section */}
       <section
         id="top"
         className="h-[38rem] flex flex-col items-center justify-center py-20 bg-gradient-to-r backdrop-blur-xl from-primary/30 to-monotone to-60% md:to-75% text-center scroll-mt-16 overflow-hidden relative"
       >
-
         <BackgroundStripes />
 
         <div className="flex flex-col items-center w-full max-w-[calc(100%-40px)] z-10">
@@ -38,40 +36,11 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-16 bg-monotone scroll-mt-16">
-        <div className="max-w-[calc(100%-40px)] flex flex-col md:flex-row container items-center justify-center mx-auto text-start gap-12">
-
-          <ThemedHeadshot />
-
-          <div>
-            <h2 className="text-3xl font-semibold mb-4">A Bit About Me</h2>
-            <p className="text-lg text-card-foreground max-w-3xl mx-auto mb-4">
-              Hello! I&apos;m Austin. I am a web developer based in Hudson,
-              WI. I build modern, responsive websites that look great and
-              function flawlessly across devices.
-            </p>
-            <p className="text-lg text-card-foreground max-w-3xl mx-auto mb-4">
-              Whether you need a refresh, an upgrade, or a brand-new site, I
-              can help. Let&apos;s create something that works for you.
-            </p>
-            <p className="w-auto text-lg text-card-foreground max-w-3xl mx-auto">
-              If your website needs a lift,
-              <a
-                href="#contact"
-                className="text-ring underline px-[4px] mx-[2px] rounded-sm"
-              >
-                reach out
-              </a>
-              and let&apos;s get started.
-            </p>
-          </div>
-        </div>
-      </section>
+      <AboutSection />
 
       {/* Why Web Matters Section */}
       <section className="flex items-center justify-center py-16 min-h-[100vh] backdrop-blur-xl bg-gradient-to-r from-ring/60 via-ring/40 via-20% to-ring/10">
         <div className="w-[calc(100%-40px)] max-w-[1520px] flex flex-col items-center justify-center mx-auto text-center gap-8">
-
           <WebMetricsSection />
 
           <div className="w-full flex flex-col items-start shadow text-start p-6 bg-card rounded-lg gap-2">
@@ -83,8 +52,8 @@ export default function Home() {
               <p>
                 A well-designed website is more than just <b>visual appeal</b>
                 —it&apos;s the foundation of your{" "}
-                <b>brand&apos;s online success</b>. Performance,
-                accessibility, and user experience{" "}
+                <b>brand&apos;s online success</b>. Performance, accessibility,
+                and user experience{" "}
                 <b>directly influence customer retention and SEO rankings</b>.
               </p>
               <div>
@@ -113,10 +82,10 @@ export default function Home() {
                   User Experience &amp; Retention:
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  A poorly designed site—confusing navigation, slow load
-                  times, or clashing colors—can push visitors away in{" "}
-                  <b>seconds</b>. Good design naturally encourages engagement,
-                  trust, and conversions.
+                  A poorly designed site—confusing navigation, slow load times,
+                  or clashing colors—can push visitors away in <b>seconds</b>.
+                  Good design naturally encourages engagement, trust, and
+                  conversions.
                 </p>
               </div>
               <div>
@@ -189,16 +158,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="w-full p-2 flex items-center justify-center bg-card text-center">
-        <p className="max-w-[calc(100%-40px)] text-[8px] md:text-xs text-muted-foreground">
-          &copy; {new Date().getFullYear()} Austin Mans Portfolio. All rights
-          reserved.
-        </p>
-      </footer>
-
     </main>
-
   );
 }
