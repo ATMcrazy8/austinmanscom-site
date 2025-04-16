@@ -2,7 +2,8 @@ import puppeteer from "puppeteer";
 import fs from "fs";
 import path from "path";
 
-const REFEREE_STATS_URL = "https://scoutingtherefs.com/2024-25-nhl-referee-stats/";
+const REFEREE_STATS_URL =
+  "https://scoutingtherefs.com/2024-25-nhl-referee-stats/";
 
 async function scrapeRefereeData() {
   try {
@@ -15,12 +16,16 @@ async function scrapeRefereeData() {
 
     await page.goto(REFEREE_STATS_URL, {
       waitUntil: "domcontentloaded", // or "networkidle0" if it's slow
-    });    
+    });
 
     console.log("⏳ Checking if the table exists...");
-    const tableExists = await page.evaluate(() => !!document.querySelector("#tablepress-226 tbody"));
+    const tableExists = await page.evaluate(
+      () => !!document.querySelector("#tablepress-226 tbody")
+    );
     if (!tableExists) {
-      throw new Error("❌ Table not found on the page. Website structure may have changed.");
+      throw new Error(
+        "❌ Table not found on the page. Website structure may have changed."
+      );
     }
     console.log("✅ Table found! Proceeding with data extraction...");
 
@@ -29,7 +34,9 @@ async function scrapeRefereeData() {
 
     console.log("📦 Extracting referee data...");
     const referees = await page.evaluate(() => {
-      return Array.from(document.querySelectorAll("#tablepress-226 tbody tr")).map(row => {
+      return Array.from(
+        document.querySelectorAll("#tablepress-226 tbody tr")
+      ).map((row) => {
         const cells = row.querySelectorAll("td");
         return {
           name: cells[0]?.innerText.trim() || "Unknown",
@@ -56,7 +63,9 @@ async function scrapeRefereeData() {
     }
 
     const filePath = path.join(process.cwd(), "data", "referees.json");
-    const filteredReferees = referees.filter(ref => ref.name !== "Unknown" && ref.name !== "NHL Average");
+    const filteredReferees = referees.filter(
+      (ref) => ref.name !== "Unknown" && ref.name !== "NHL Average"
+    );
     fs.writeFileSync(filePath, JSON.stringify(filteredReferees, null, 2));
 
     console.log("✅ Referees data updated successfully!");

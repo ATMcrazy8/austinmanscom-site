@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 👋 Welcome to AustinMans.com
 
-## Getting Started
+This is the source code for my personal portfolio site: [**AustinMans.com**](https://austinmans.com)
 
-First, run the development server:
+Built to showcase my abilities through design and personal projects.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ⚙️ Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 🔨 Frameworks & Languages
+- [Next.js 15 (App Router)](https://nextjs.org/)
+  - React.js  
+  - TypeScript  
+  - Node.js  
+- Tailwind CSS (utility-first styling)  
+- ShadCN/UI (pre-built accessible components)  
+- ESLint & Prettier (code linting and formatting)  
+- Framer Motion (animations)  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🎨 Design
+- Custom themes using dynamic **HSL hue manipulation**  
+- Global theming powered by Tailwind CSS variables  
+- Light/Dark modes supported using Tailwind’s `.dark` variants  
 
-## Learn More
+### 🧩 UI Libraries
+- [Lucide](https://lucide.dev/) and [MUI](https://mui.com/) icons  
+- Recharts (radar charts for stat visualization)  
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Referee Analytics
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+My first project added to the site is dedicated to tracking NHL referee trends and patterns.
 
-## Deploy on Vercel
+### 📊 How It Works
+- **Data Source:** All ref stats are scraped from [scoutingtherefs.com](https://scoutingtherefs.com) using [Puppeteer](https://pptr.dev/) (headless Chrome automation)  
+- **Data Storage:** Cleaned stats are saved to a local JSON file:  
+  `data/referees.json`  
+- **Automation:** GitHub Actions automatically run a script nightly to:
+  - Fetch the latest stats  
+  - Overwrite the existing JSON file  
+  - Commit updates to the repo  
+- **Page Generation:**  
+  - Each referee has an individual page generated using their slugified name  
+  - Slugs are created using a custom `slugify` utility  
+  - Stats are displayed using both tables and radar charts to compare against the calculated league averages 
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
