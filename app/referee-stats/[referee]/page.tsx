@@ -10,9 +10,9 @@ const formatPercent = (val: string | number) => `${parseFloat(String(val)).toFix
 const averages = calculateAverages(referees);
 
 type PageProps = {
-    params: {
+    params: Promise<{
         referee: string;
-    };
+    }>;
 };
 
 function calculateAverages(data: typeof referees) {
@@ -75,7 +75,8 @@ export async function generateStaticParams() {
 
 
 export default async function RefereePage({ params }: PageProps) {
-    const refereeSlug = params.referee;
+    const { referee } = await params;
+    const refereeSlug = referee;
     const refData = referees.find(ref => slugify(ref.name) === refereeSlug);
     if (!refData) return notFound();
 
