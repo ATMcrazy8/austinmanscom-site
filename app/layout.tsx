@@ -1,8 +1,8 @@
 "use client";
 
 import { ThemeProvider } from "./context/ThemeProvider";
-import Header from "@/components/Header";
-import SiteFooter from "@/components/Footer";
+import Header from "@/components/sections/Header";
+import SiteFooter from "@/components/sections/Footer";
 import { Inter, Space_Mono } from "next/font/google";
 import "./globals.css";
 
