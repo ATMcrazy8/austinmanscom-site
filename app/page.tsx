@@ -1,9 +1,9 @@
 "use client";
 
 import { useTheme } from "@/app/context/ThemeProvider";
-import AboutSection from "@/components/AboutSection";
+import AboutSection from "@/components/sections/AboutSection";
 import BackgroundStripes from "@/components/BackgroundStripes";
-import WebMetricsSection from "@/components/WebMetricsSection";
+import WhyWebMatters from "@/components/sections/WhyWebMatters";
 
 export default function Home() {
   const { theme } = useTheme();
@@ -39,72 +39,7 @@ export default function Home() {
       <AboutSection />
 
       {/* Why Web Matters Section */}
-      <section className="flex items-center justify-center py-16 min-h-[100vh] backdrop-blur-xl bg-gradient-to-r from-ring/60 via-ring/40 via-20% to-ring/10">
-        <div className="w-[calc(100%-40px)] max-w-[1520px] flex flex-col items-center justify-center mx-auto text-center gap-8">
-          <WebMetricsSection />
-
-          <div className="w-full flex flex-col items-start shadow text-start p-6 bg-card rounded-lg gap-2">
-            <h2 className="text-3xl text-monotone-foreground font-semibold">
-              Prioritizing Your Web Presence:{" "}
-              <i className="text-card-foreground">Why It Matters</i>
-            </h2>
-            <div className="flex flex-col items-start text-base/[1.4rem] text-card-foreground gap-8">
-              <p>
-                A well-designed website is more than just <b>visual appeal</b>
-                —it&apos;s the foundation of your{" "}
-                <b>brand&apos;s online success</b>. Performance, accessibility,
-                and user experience{" "}
-                <b>directly influence customer retention and SEO rankings</b>.
-              </p>
-              <div>
-                <h3 className="text-lg font-medium text-foreground">
-                  Site Speed &amp; Performance:
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Users expect pages to load in <b>under 3 seconds</b>. Any
-                  delay leads to lost conversions and a lower ranking in
-                  Google&apos;s search results.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-lg font-medium text-foreground">
-                  SEO &amp; Discoverability:
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  A strong web presence ensures{" "}
-                  <b>search engines rank your site higher</b>, bringing in new
-                  customers. Without <b>proper SEO</b>, your business risks
-                  being invisible online.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-lg font-medium text-foreground">
-                  User Experience &amp; Retention:
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  A poorly designed site—confusing navigation, slow load times,
-                  or clashing colors—can push visitors away in <b>seconds</b>.
-                  Good design naturally encourages engagement, trust, and
-                  conversions.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-lg font-medium text-foreground">
-                  Smart Web Strategies for Growth:
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Whether your site needs a{" "}
-                  <b>redesign, optimization, or small tweaks</b>, I help
-                  businesses build high-performance websites that{" "}
-                  <b>stand out, rank higher, and drive results</b>.
-                </p>
-              </div>
-
-              <b>Let&apos;s build a site that works for you!</b>
-            </div>
-          </div>
-        </div>
-      </section>
+      <WhyWebMatters />
 
       {/* Contact Section */}
       <section

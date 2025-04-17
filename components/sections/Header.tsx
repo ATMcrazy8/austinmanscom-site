@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import MobileMenu from "./MobileMenu";
+import MobileMenu from "@/components/sections/MobileMenu";
 
 export default function Header() {
   const router = useRouter();

@@ -71,7 +71,7 @@ export default function RefereeStats() {
     );
 
   return (
-    <div className="flex flex-col items-center gap-4 p-8 w-full">
+    <div className="flex flex-col items-center gap-4 py-8 w-full">
       <div className="w-[calc(100%-40px)] max-w-[1520px] text-start">
         <h1 className="text-3xl font-bold text-card-foreground mb-4">
           NHL Referees
