@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import ThemedHeadshot from "@/components/ThemedHeadshot";
-import RisingBlob from "@/components/AnimatedBlob";
+import AnimatedLogo from "../AnimatedLogo";
 
 export default function AboutSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -14,11 +14,9 @@ export default function AboutSection() {
       ref={sectionRef}
       className="relative py-16 bg-monotone scroll-mt-16 overflow-hidden"
     >
-      {/* Animated Blob */}
-      <div className="absolute inset-0 z-0">
-        <RisingBlob />
-      </div>
-
+      {/* Animated Logo */}
+      <AnimatedLogo />
+      
       {/* Actual content */}
       <div className="relative z-10 max-w-[calc(100%-40px)] flex flex-col md:flex-row container items-center justify-center mx-auto text-start gap-12">
         {/* Floating Headshot */}

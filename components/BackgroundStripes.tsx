@@ -4,16 +4,16 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const stripes = [
+  { width: "w-2", opacity: "bg-ring/[1%]" },
   { width: "w-2", opacity: "bg-ring/[2%]" },
-  { width: "w-2", opacity: "bg-ring/[4%]" },
-  { width: "w-3", opacity: "bg-ring/[6%]" },
-  { width: "w-3", opacity: "bg-ring/[8%]" },
-  { width: "w-4", opacity: "bg-ring/[10%]" },
-  { width: "w-4", opacity: "bg-ring/[12%]" },
-  { width: "w-5", opacity: "bg-ring/[14%]" },
-  { width: "w-5", opacity: "bg-ring/[16%]" },
-  { width: "w-6", opacity: "bg-ring/[18%]" },
-  { width: "w-6", opacity: "bg-ring/[20%]" },
+  { width: "w-3", opacity: "bg-ring/[3%]" },
+  { width: "w-3", opacity: "bg-ring/[4%]" },
+  { width: "w-4", opacity: "bg-ring/[5%]" },
+  { width: "w-4", opacity: "bg-ring/[6%]" },
+  { width: "w-5", opacity: "bg-ring/[7%]" },
+  { width: "w-5", opacity: "bg-ring/[8%]" },
+  { width: "w-6", opacity: "bg-ring/[9%]" },
+  { width: "w-6", opacity: "bg-ring/[10%]" },
 ];
 
 export default function BackgroundStripes() {
@@ -21,10 +21,9 @@ export default function BackgroundStripes() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIsVisible(false); // slide out
-      setTimeout(() => setIsVisible(true), 2000); // wait then slide in again
-    }, 10000); // repeat every 10s
-
+      setIsVisible((prev) => !prev); 
+    }, 20000); // Repeat every 20s
+  
     return () => clearInterval(interval);
   }, []);
 
