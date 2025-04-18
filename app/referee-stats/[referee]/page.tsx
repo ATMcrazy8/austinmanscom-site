@@ -156,25 +156,38 @@ export default async function RefereePage({ params }: PageProps) {
     <div className="w-[calc(100%-40px)] max-w-[1520px] mx-auto py-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
         <div className="flex items-center space-x-4">
-          <div className="w-24 sm:w-32 md:w-40 aspect-square relative">
-            <Image
-              src={photoUrl}
-              alt={refData.name}
-              fill
-              className="rounded-full object-cover"
-            />
+        <div className="relative w-24 sm:w-32 md:w-40 aspect-square">
+            {/* Animated Gradient Border */}
+            <div className="absolute inset-0 p-2 bg-gradient-to-r from-primary from-70% via-primary-foreground via-78% to-primary to-86% rounded-full animate-border-flash z-0">
+              {/* Inner circle to hold the image */}
+              <div className="w-full h-full rounded-full bg-transparent overflow-hidden z-10">
+                <Image
+                  src={photoUrl}
+                  alt={refData.name}
+                  fill
+                  className="rounded-full object-cover p-[2px]"
+                />
+              </div>
+            </div>
           </div>
+
+
           <div className="flex flex-col gap-0">
             <div className="flex items-center justify-start w-full">
-              <div className="flex items-top text-xl font-medium text-secondary-foreground">
+              <div className="flex items-top text-xl font-medium text-card-foreground/80">
                 <span className="text-xs">#</span>
                 {refData.refNumber}
               </div>
             </div>
             <h1>
-              <span className="text-lg leading-none font-light text-primary">{firstName}</span>
+              <span className="text-lg leading-none font-light text-secondary-foreground">
+                {firstName}
+              </span>
               <br />
-              <span className="text-3xl leading-6 font-bold text-primary">{lastName}</span></h1>
+              <span className="text-3xl leading-6 font-bold text-transparent bg-clip-text bg-gradient-to-br from-accent-foreground via-ring to-accent-foreground">
+                {lastName}
+              </span>
+            </h1>
             <p className="text-md leading-4 text-muted-foreground mt-2">{refData.totalGames} Games</p>
           </div>
         </div>
