@@ -38,7 +38,7 @@ export default function AboutSection() {
           </p>
           <p className="w-auto text-lg text-card-foreground max-w-3xl mx-auto">
             If your website needs a lift,
-            <a href="#contact" className="text-ring underline px-[4px] mx-[2px] rounded-sm">
+            <a href="#contact" className="text-secondary-foreground hover:text-primary font-medium underline px-[4px] mx-[2px] transition-colors duration-300">
               reach out
             </a>
             and let&apos;s get started.

@@ -110,3 +110,18 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+@keyframes borderFlash {
+  0%, 70% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 0%;
+  }
+}
+
+.animate-border-flash {
+  background-size: 300% 100%;
+  animation: borderFlash 16s ease-in-out infinite;
+}

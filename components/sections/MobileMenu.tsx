@@ -26,7 +26,10 @@ export default function MobileMenu() {
     <Sheet>
       {/* Hamburger Button - Opens Sheet */}
       <SheetTrigger asChild>
-        <button className="flex items-center gap-2 text-foreground hover:text-primary transition-colors">
+        <button 
+          aria-label="Open menu"
+          className="flex items-center gap-2 text-foreground hover:text-primary transition-colors"
+        >
           <Menu className="w-6 h-6" />
         </button>
       </SheetTrigger>

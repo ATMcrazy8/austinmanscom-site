@@ -91,12 +91,12 @@ export default function Home() {
                 <a
                   href={href}
                   target="_blank"
-                  className="flex items-center gap-4 p-4 bg-primary text-primary-foreground rounded-xl hover:shadow-monotone-foreground/20 hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
+                  className="flex items-center gap-4 p-4 bg-accent-foreground rounded-xl hover:bg-accent-foreground/90 hover:shadow-accent/20 hover:shadow-md hover:scale-[1.02] transition-all duration-300"
                 >
-                  <Icon className="w-5 h-5 shrink-0" />
+                  <Icon className="w-5 h-5 shrink-0 stroke-accent" />
                   <div className="flex flex-col">
-                    <span className="text-xs opacity-80">{label}</span>
-                    <span className="text-md font-mono">{value}</span>
+                    <span className="text-xs text-accent">{label}</span>
+                    <span className="text-primary-foreground text-md font-mono">{value}</span>
                   </div>
                 </a>
               </li>
