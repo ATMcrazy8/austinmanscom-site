@@ -1,12 +1,35 @@
 "use client";
 
 import { useTheme } from "@/app/context/ThemeProvider";
+import { Phone, Mail, Linkedin } from "lucide-react";
 import AboutSection from "@/components/sections/AboutSection";
 import BackgroundStripes from "@/components/BackgroundStripes";
 import WhyWebMatters from "@/components/sections/WhyWebMatters";
+import RisingBlob from "@/components/AnimatedBlob";
 
 export default function Home() {
   const { theme } = useTheme();
+
+  const contactItems = [
+    {
+      label: "Phone",
+      href: "sms:9522884408",
+      value: "(952) 288-4408",
+      icon: Phone,
+    },
+    {
+      label: "Email",
+      href: "mailto:austin.t.mans@gmail.com",
+      value: "austin.t.mans@gmail.com",
+      icon: Mail,
+    },
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/austin-mans/",
+      value: "/austin-mans",
+      icon: Linkedin,
+    },
+  ];
 
   if (!theme) return null;
 
@@ -44,53 +67,41 @@ export default function Home() {
       {/* Contact Section */}
       <section
         id="contact"
-        className="flex items-center justify-center min-h-[50vh] bg-monotone scroll-mt-16"
+        className="flex items-center justify-center min-h-[50vh] bg-monotone scroll-mt-16 relative overflow-hidden"
       >
-        <div className="w-[calc(100%-40px)] max-w-[1520px] py-12 flex flex-col items-center justify-between text-start gap-10">
-          <div className="flex flex-col items-center text-center gap-4 text-pretty max-w-[28rem]">
+        {/* Animated Background Blob */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <RisingBlob />
+        </div>
+
+        {/* CTA Content */}
+        <div className="relative z-10 w-[calc(100%-40px)] max-w-[1520px] py-12 flex flex-col items-center gap-10">
+          <div className="text-center max-w-[28rem]">
             <h2 className="text-3xl md:text-5xl font-semibold text-foreground">
               Still Here?
             </h2>
-            <p className="text-sm md:text-lg text-card-foreground mx-auto">
-              Let&apos;s Chat. Email or text are usually best, but I can be
-              reached at any of the following:
+            <p className="text-sm md:text-lg text-card-foreground mt-2">
+              Let&apos;s Chat. Email or text are usually best, but I can be reached at any of the following:
             </p>
           </div>
-          <div className="block w-full max-w-[28rem] mx-auto">
-            <ul className="w-full bg-primary/80 text-sm md:text-base text-primary-foreground p-2 shadow rounded-lg">
-              <li className="mb-2">
+
+          <ul className="w-full max-w-[28rem] space-y-4">
+            {contactItems.map(({ label, href, value, icon: Icon }) => (
+              <li key={label}>
                 <a
-                  className="flex flex-row flex-wrap items-center justify-between gap-4 p-2 rounded-md hover:bg-card-foreground/10"
-                  href="sms:9522884408"
-                >
-                  <h3 className="w-16">Phone: </h3>
-                  <p className="w-48 text-end ml-auto mr-0">(952)288-4408</p>
-                </a>
-              </li>
-              <li className="mb-2">
-                <a
-                  className="flex flex-row flex-wrap items-center justify-between gap-4 p-2 rounded-md hover:bg-card-foreground/10"
-                  href="mailto:austin.t.mans@gmail.com"
+                  href={href}
                   target="_blank"
+                  className="flex items-center gap-4 p-4 bg-primary text-primary-foreground rounded-xl hover:shadow-monotone-foreground/20 hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
                 >
-                  <h3 className="w-16">Email: </h3>
-                  <p className="w-48 text-end  ml-auto mr-0">
-                    austin.t.mans@gmail.com
-                  </p>
+                  <Icon className="w-5 h-5 shrink-0" />
+                  <div className="flex flex-col">
+                    <span className="text-xs opacity-80">{label}</span>
+                    <span className="text-md font-mono">{value}</span>
+                  </div>
                 </a>
               </li>
-              <li>
-                <a
-                  className="flex flex-row flex-wrap items-center justify-between gap-4 p-2 rounded-md hover:bg-card-foreground/10"
-                  href="https://www.linkedin.com/in/austin-mans/"
-                  target="_blank"
-                >
-                  <h3 className="w-16">LinkedIn: </h3>
-                  <p className="w-48 text-end  ml-auto mr-0">/austin-mans</p>
-                </a>
-              </li>
-            </ul>
-          </div>
+            ))}
+          </ul>
         </div>
       </section>
     </main>
