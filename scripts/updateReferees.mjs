@@ -63,25 +63,31 @@ async function scrapeRefereeData() {
       return;
     }
 
+    // Filter out "Unknown" and "NHL Average" before calculating scores
+    const validReferees = referees.filter(
+      (ref) => ref.name !== "Unknown" && ref.name !== "NHL Average"
+    );
+
     // Calculate fairness scores
     console.log("📊 Calculating fairness scores...");
-    const fairnessScores = getFairnessScores(referees);
+    const fairnessScores = getFairnessScores(validReferees);
+    console.log(`✅ Calculated scores for ${fairnessScores.length} referees.`);
     
     // Add fairness scores to referee data
-    const refereesWithScores = referees.map(ref => {
+    const refereesWithScores = validReferees.map(ref => {
       const score = fairnessScores.find(s => s.name === ref.name);
+      if (!score) {
+        console.warn(`⚠️ No score found for referee: ${ref.name}`);
+      }
       return {
         ...ref,
-        fairnessScore: score?.score,
-        fairnessGrade: score?.grade
+        fairnessScore: score?.score ?? 0,
+        fairnessGrade: score?.grade ?? "F"
       };
     });
 
     const filePath = path.join(process.cwd(), "data", "referees.json");
-    const filteredReferees = refereesWithScores.filter(
-      (ref) => ref.name !== "Unknown" && ref.name !== "NHL Average"
-    );
-    fs.writeFileSync(filePath, JSON.stringify(filteredReferees, null, 2));
+    fs.writeFileSync(filePath, JSON.stringify(refereesWithScores, null, 2));
 
     console.log("✅ Referees data updated successfully!");
     await browser.close();
