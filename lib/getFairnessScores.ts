@@ -13,7 +13,6 @@ export type Referee = Record<RefereeStatKey, number | string> & {
     name: string;
 };
 
-
 export type FairnessScore = {
   name: string;
   score: number; // 0–100, higher = more fair
@@ -35,7 +34,7 @@ function calculateStdDev(values: number[], mean: number): number {
   return Math.sqrt(variance);
 }
 
-export default function getFairnessScores(referees: Referee[]): FairnessScore[] {
+export function getFairnessScores(referees: Referee[]): FairnessScore[] {
   const keys: RefereeStatKey[] = [
     "goalsPerGame",
     "ppOpportunities",
