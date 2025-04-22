@@ -6,9 +6,11 @@ import { slugify } from "@/lib/slugify";
 import RefereeRadar from "@/components/RefereeRadar";
 import referees from "../../../data/referees.json";
 
+
 const formatPercent = (val: string | number) =>
   `${parseFloat(String(val)).toFixed(2)}%`;
 const averages = calculateAverages(referees);
+
 
 type PageProps = {
   params: Promise<{
@@ -79,6 +81,7 @@ export async function generateStaticParams() {
   return referees.map((ref) => ({ referee: slugify(ref.name) }));
 }
 
+
 export default async function RefereePage({ params }: PageProps) {
   const { referee } = await params;
   const refereeSlug = referee;
@@ -130,7 +133,7 @@ export default async function RefereePage({ params }: PageProps) {
     { 
       label: "Penalty Home %",
       key: "penaltyHomePercentage",
-      context: "The percentage of total penalties assessed against the home team. Rank #1 means home teams receive the most penalties under this official. This stat may suggest bias but isn’t definitive.",
+      context: "The percentage of total penalties assessed against the home team. Rank #1 means home teams receive the most penalties under this official. This stat may suggest bias but isn't definitive.",
       isPercent: true
     },
     { 
@@ -154,42 +157,83 @@ export default async function RefereePage({ params }: PageProps) {
 
   return (
     <div className="w-[calc(100%-40px)] max-w-[1520px] mx-auto py-6">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
-        <div className="flex items-center space-x-4">
-        <div className="relative w-24 sm:w-32 md:w-40 aspect-square">
-            {/* Animated Gradient Border */}
-            <div className="absolute inset-0 p-2 bg-gradient-to-r from-primary from-70% via-primary-foreground via-78% to-primary to-86% rounded-full animate-border-flash z-0">
-              {/* Inner circle to hold the image */}
-              <div className="w-full h-full rounded-full bg-transparent overflow-hidden z-10">
-                <Image
-                  src={photoUrl}
-                  alt={refData.name}
-                  fill
-                  className="rounded-full object-cover p-[2px]"
-                />
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-12">
+        <div className="flex flex-col gap-10">
+          <div className="flex items-center gap-4">
+            <div className="relative w-24 sm:w-32 md:w-40 aspect-square">
+              {/* Animated Gradient Border */}
+              <div className="absolute inset-0 p-2 bg-gradient-to-r from-primary from-70% via-primary-foreground via-78% to-primary to-86% rounded-full animate-border-flash z-0">
+                {/* Inner circle to hold the image */}
+                <div className="w-full h-full rounded-full bg-transparent overflow-hidden z-10">
+                  <Image
+                    src={photoUrl}
+                    alt={refData.name}
+                    fill
+                    className="rounded-full object-cover p-[2px]"
+                  />
+                </div>
               </div>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center">
+                <div className="flex items-top text-xl font-medium text-card-foreground/80">
+                  <span className="text-xs">#</span>
+                  {refData.refNumber}
+                </div>
+              </div>
+              <h1>
+                <span className="text-lg leading-none font-light text-secondary-foreground">
+                  {firstName}
+                </span>
+                <br />
+                <span className="text-3xl leading-6 font-bold text-transparent bg-clip-text bg-gradient-to-br from-accent-foreground via-ring to-accent-foreground">
+                  {lastName}
+                </span>
+              </h1>
+              <p className="text-md leading-4 text-muted-foreground">{refData.totalGames} Games</p>
             </div>
           </div>
 
-
-          <div className="flex flex-col gap-0">
-            <div className="flex items-center justify-start w-full">
-              <div className="flex items-top text-xl font-medium text-card-foreground/80">
-                <span className="text-xs">#</span>
-                {refData.refNumber}
+          {refData.fairnessGrade && (
+            <div className="text-primary mx-auto">
+              <div className="relative inline-flex flex-col group">
+                <div className="flex items-center gap-4 px-2">
+                  <h3 className="text-secondary-foreground text-2xl font-semibold">Fairness Grade:</h3>
+                  <p 
+                    className="text-[48px] font-bold"
+                    style={{
+                      color: `hsl(${Math.max(0, Math.min(120, refData.fairnessScore * 1.2))}, 70%, 50%)`
+                    }}
+                  >
+                    {refData.fairnessGrade}
+                  </p>
+                </div>
+                <div 
+                  className="h-0.5 bg-muted rounded-full overflow-hidden"
+                  style={{ width: '100%' }}
+                >
+                  <div 
+                    className="h-full rounded-full"
+                    style={{
+                      width: `${refData.fairnessScore}%`,
+                      backgroundColor: `hsl(${Math.max(0, Math.min(120, refData.fairnessScore * 1.2))}, 70%, 50%)`
+                    }}
+                  />
+                </div>
+                <div className="absolute -bottom-8 right-0 sm:-bottom-3 sm:-right-20 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  <div className="bg-card border rounded px-2 py-1 shadow-sm">
+                    <p className="text-xs text-card-foreground">
+                      {refData.fairnessScore} / 100
+                    </p>
+                  </div>
+                </div>
               </div>
+              <p className="text-[10px] text-muted-foreground mt-2">
+                *Based on deviation from league averages*
+              </p>
             </div>
-            <h1>
-              <span className="text-lg leading-none font-light text-secondary-foreground">
-                {firstName}
-              </span>
-              <br />
-              <span className="text-3xl leading-6 font-bold text-transparent bg-clip-text bg-gradient-to-br from-accent-foreground via-ring to-accent-foreground">
-                {lastName}
-              </span>
-            </h1>
-            <p className="text-md leading-4 text-muted-foreground mt-2">{refData.totalGames} Games</p>
-          </div>
+          )}
         </div>
 
         <div className="w-full md:w-3/5 text-primary">
@@ -244,3 +288,4 @@ export default async function RefereePage({ params }: PageProps) {
     </div>
   );
 }
+

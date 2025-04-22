@@ -26,7 +26,7 @@ export default function RisingBlob() {
       {/* Circle (sun/orbit) */}
       <motion.div
         style={{ x, y, rotate }}
-        className="absolute left-[calc(50%-250px)] top-full w-[200px] h-[200px] bg-secondary/10 blur-lg rounded-full -z-100 pointer-events-none"
+        className="absolute left-[calc(50%-250px)] top-full w-[200px] h-[200px] bg-chart-3/15 blur-md rounded-full -z-100 pointer-events-none"
       />
 
       {/* Triangle (bobbing motion) */}
@@ -44,7 +44,7 @@ export default function RisingBlob() {
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute top-[20%] left-[15%] w-0 h-0 border-l-[80px] border-r-[80px] border-b-[140px] border-l-transparent border-r-transparent border-b-ring/10 blur-lg -z-100 pointer-events-none"
+        className="absolute top-[20%] left-[15%] w-0 h-0 border-l-[80px] border-r-[80px] border-b-[140px] border-l-transparent border-r-transparent border-b-chart-5/15 blur-md -z-100 pointer-events-none"
       />
 
       {/* Square (linear path) */}
@@ -60,7 +60,7 @@ export default function RisingBlob() {
           repeat: Infinity,
           ease: "easeInOut",              // Smooth bounce
         }}
-        className="absolute top-[70%] w-[200px] h-[200px] bg-accent/10 blur-lg -z-100 pointer-events-none"
+        className="absolute top-[70%] w-[200px] h-[200px] bg-chart-1/15 blur-md -z-100 pointer-events-none"
       />
     </>
   );
