@@ -1,7 +1,7 @@
 import puppeteer from "puppeteer";
 import fs from "fs";
 import path from "path";
-import { getFairnessScores } from "./lib/getFairnessScores.js";
+import { getFairnessScores } from "../lib/getFairnessScores.js";
 
 const REFEREE_STATS_URL =
   "https://scoutingtherefs.com/2024-25-nhl-referee-stats/";
