@@ -4,18 +4,16 @@ import Link from "next/link";
 import { slugify } from "@/lib/slugify";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { calculateFairnessScores } from "@/lib/calculateFairnessScores";
+import { ArrowUpDown } from "lucide-react";
+import { Referee as FairnessReferee } from "@/lib/calculateFairnessScores";
 
 
-type Referee = {
-  id: number;
-  refNumber: number;
-  name: string;
-  totalGames: number;
-  penaltiesPerGame: number;
-  pimPerGame: number;
-  avgPenaltyDiff: number;
-  fairnessScore?: number;
-  fairnessGrade?: string;
+type Referee = FairnessReferee & {
+  fairnessScore: {
+    score: number;
+    grade: string;
+  };
 };
 
 type SortKey = "lastName" | "refNumber" | "totalGames" | "fairnessScore";
@@ -28,6 +26,26 @@ export default function RefereeStats() {
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
   const [gradeFilter, setGradeFilter] = useState<string>("all");
 
+  // Get default direction for a sort type
+  const getDefaultDirection = (type: SortKey): SortDirection => {
+    switch (type) {
+      case "lastName":
+        return "asc"; // A to Z
+      case "refNumber":
+        return "asc"; // Low to High
+      case "totalGames":
+        return "desc"; // Most to Least
+      case "fairnessScore":
+        return "desc"; // A to F
+    }
+  };
+
+  // Handle sort type change
+  const handleSortByChange = (newSortBy: SortKey) => {
+    setSortBy(newSortBy);
+    setSortDirection(getDefaultDirection(newSortBy));
+  };
+
   useEffect(() => {
     fetch("/api/referees")
       .then((res) => res.json())
@@ -37,35 +55,86 @@ export default function RefereeStats() {
       });
   }, []);
 
-  const sortedReferees = [...referees]
-    .filter(ref => gradeFilter === "all" || ref.fairnessGrade === gradeFilter)
-    .sort((a, b) => {
-      if (sortBy === "lastName") {
-        const getLastName = (name: string) => {
-          const cleaned = name.replace(/\*/g, "").trim();
-          const parts = cleaned.split(",");
-          return parts.length > 1
-            ? parts[0].trim().toLowerCase()
-            : cleaned.split(" ").slice(-1)[0].toLowerCase();
-        };
-        return sortDirection === "asc"
-          ? getLastName(a.name).localeCompare(getLastName(b.name))
-          : getLastName(b.name).localeCompare(getLastName(a.name));
-      } else if (sortBy === "refNumber") {
-        return sortDirection === "asc"
-          ? a.refNumber - b.refNumber
-          : b.refNumber - a.refNumber;
-      } else if (sortBy === "totalGames") {
-        return sortDirection === "asc"
-          ? a.totalGames - b.totalGames
-          : b.totalGames - a.totalGames;
-      } else if (sortBy === "fairnessScore") {
-        return sortDirection === "asc"
-          ? (a.fairnessScore || 0) - (b.fairnessScore || 0)
-          : (b.fairnessScore || 0) - (a.fairnessScore || 0);
-      }
-      return 0;
-    });
+  // Calculate fairness scores for all referees
+  const fairnessScores = calculateFairnessScores(referees);
+  
+  // Combine referee data with fairness scores
+  const refereesWithScores = referees.map(ref => ({
+    ...ref,
+    fairnessScore: {
+      score: fairnessScores.find(s => s.name === ref.name)?.score ?? 0,
+      grade: fairnessScores.find(s => s.name === ref.name)?.grade ?? "F"
+    }
+  }));
+
+  // Filter by grade if needed
+  const filteredReferees = gradeFilter === "all" 
+    ? refereesWithScores 
+    : refereesWithScores.filter(ref => ref.fairnessScore.grade === gradeFilter);
+
+  // Sort referees based on selected criteria
+  const sortedReferees = [...filteredReferees].sort((a, b) => {
+    let comparison = 0;
+    
+    switch (sortBy) {
+      case "lastName":
+        const aLastName = a.name.split(",")[0].trim();
+        const bLastName = b.name.split(",")[0].trim();
+        // Make A appear at top, Z at bottom
+        comparison = aLastName.localeCompare(bLastName);
+        break;
+      case "refNumber":
+        comparison = (a.refNumber || 0) - (b.refNumber || 0);
+        break;
+      case "totalGames":
+        comparison = a.totalGames - b.totalGames;
+        break;
+      case "fairnessScore":
+        comparison = (a.fairnessScore.score || 0) - (b.fairnessScore.score || 0);
+        break;
+    }
+
+    // For last names, we want A at top (ascending)
+    const effectiveDirection = sortBy === "lastName" 
+      ? sortDirection
+      : sortDirection;
+
+    return effectiveDirection === "asc" ? comparison : -comparison;
+  });
+
+  const toggleSortDirection = () => {
+    setSortDirection(prev => prev === "asc" ? "desc" : "asc");
+  };
+
+  const getDirectionText = () => {
+    switch (sortBy) {
+      case "lastName":
+        return sortDirection === "asc" ? "A to Z" : "Z to A";
+      case "refNumber":
+        return sortDirection === "asc" ? "Low to High" : "High to Low";
+      case "totalGames":
+        return sortDirection === "asc" ? "Least to Most" : "Most to Least";
+      case "fairnessScore":
+        return sortDirection === "asc" ? "F to A" : "A to F";
+      default:
+        return "";
+    }
+  };
+
+  const getDirectionTitle = () => {
+    switch (sortBy) {
+      case "lastName":
+        return sortDirection === "asc" ? "Sort A to Z" : "Sort Z to A";
+      case "refNumber":
+        return sortDirection === "asc" ? "Sort by lowest number" : "Sort by highest number";
+      case "totalGames":
+        return sortDirection === "asc" ? "Sort by fewest games" : "Sort by most games";
+      case "fairnessScore":
+        return sortDirection === "asc" ? "Sort by lowest grade" : "Sort by highest grade";
+      default:
+        return "";
+    }
+  };
 
   if (loading)
     return (
@@ -80,42 +149,39 @@ export default function RefereeStats() {
     );
 
   return (
-    <div className="flex flex-col items-center gap-4 py-8 w-full">
-      <div className="w-[calc(100%-40px)] max-w-[1520px] text-start">
-        <h1 className="text-3xl font-bold text-card-foreground mb-4">
-          NHL Referees
-        </h1>
+    <div className="w-full min-h-screen bg-background">
+      <div className="flex flex-col items-center gap-4 py-8 w-[calc(100%-40px)] max-w-[1520px] mx-auto">
+        <div className="w-full text-start">
+          <h1 className="text-3xl font-bold text-card-foreground mb-4">
+            NHL Referees
+          </h1>
 
-        <div className="flex flex-wrap gap-4 mb-6">
-          <label className="text-sm text-muted-foreground">
-            Sort by:
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as SortKey)}
-              className="ml-2 p-1 border rounded bg-background text-foreground"
+          <div className="flex flex-wrap gap-4 mb-6">
+            <label className="text-sm text-muted-foreground">
+              Sort by:
+              <select
+                value={sortBy}
+                onChange={(e) => handleSortByChange(e.target.value as SortKey)}
+                className="ml-2 p-1 border rounded bg-background text-foreground"
+              >
+                <option value="lastName">Last Name</option>
+                <option value="refNumber">Ref Number</option>
+                <option value="totalGames">Games Worked</option>
+                <option value="fairnessScore">Fairness Score</option>
+              </select>
+            </label>
+
+            <button
+              onClick={toggleSortDirection}
+              className="flex items-center gap-1 p-1 border rounded bg-background text-foreground hover:bg-muted transition-colors"
+              title={getDirectionTitle()}
             >
-              <option value="lastName">Last Name</option>
-              <option value="refNumber">Ref Number</option>
-              <option value="totalGames">Games Worked</option>
-              <option value="fairnessScore">Fairness Score</option>
-            </select>
-          </label>
+              <ArrowUpDown className="w-4 h-4" />
+              <span className="text-sm text-muted-foreground">
+                {getDirectionText()}
+              </span>
+            </button>
 
-          <label className="text-sm text-muted-foreground">
-            Direction:
-            <select
-              value={sortDirection}
-              onChange={(e) =>
-                setSortDirection(e.target.value as SortDirection)
-              }
-              className="ml-2 p-1 border rounded bg-background text-foreground"
-            >
-              <option value="asc">Ascending</option>
-              <option value="desc">Descending</option>
-            </select>
-          </label>
-
-          {sortBy === "fairnessScore" && (
             <label className="text-sm text-muted-foreground">
               Filter by Grade:
               <select
@@ -131,75 +197,43 @@ export default function RefereeStats() {
                 <option value="F">F</option>
               </select>
             </label>
-          )}
+          </div>
         </div>
-      </div>
 
-      <ul className="w-[calc(100%-40px)] max-w-[1520px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {sortedReferees.map((ref) => {
-          const slug = slugify(ref.name);
-          return (
-            <motion.li
-              key={ref.id}
-              initial={{ opacity: 0, scale: 0.98 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              whileHover={{ opacity: 1, scale: 1.02 }}
-              viewport={{ once: false, amount: 0.3 }}
-              transition={{ duration: 0.15, ease: "easeOut" }}
-              className="flex flex-row items-center justify-start border rounded-lg shadow-md bg-gradient-to-br from-secondary to-70% to-monotone hover:scale-[1.02] hover:shadow-lg hover:border-primary duration-150"
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
+          {sortedReferees.map((referee, index) => (
+            <motion.div
+              key={referee.name}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: index * 0.05 }}
             >
               <Link
-                href={`/referee-stats/${slug}`}
-                className="flex flex-row w-full"
+                href={`/referee-stats/${slugify(referee.name)}`}
+                className="block bg-gradient-to-r from-card/20 to-secondary/20 backdrop-blur-sm rounded-full border border-border/50 shadow-lg hover:shadow-xl hover:scale-[1.02] hover:border-ring/50 duration-200 h-full"
               >
-                <div className="flex items-center justify-center w-16 m-4">
-                  <p className="flex items-top gap-1 text-2xl font-bold text-monotone-foreground">
-                    <span className="text-xs">#</span>
-                    {ref.refNumber}
-                  </p>
-                </div>
-                
-                <div className="flex flex-col w-full p-4">
-                  <h2 className="text-xl text-monotone-foreground font-semibold">
-                    {ref.name}
-                  </h2>
-                  <div className="flex flex-row flex-wrap w-full gap-y-2">
-                    <p className="text-sm text-card-foreground/80 w-40 px-2">
-                      Games Worked:&#8199;
-                      <span className="text-card-foreground font-medium">
-                        {ref.totalGames}
-                      </span>
-                    </p>
-                    {ref.fairnessScore && (
-                      <p className="text-sm text-card-foreground/80 w-40 px-2">
-                        Fairness:&#8199;
-                        <span className="text-card-foreground font-medium">
-                          {ref.fairnessGrade} ({ref.fairnessScore.toFixed(1)})
-                        </span>
-                      </p>
-                    )}
-                    <p className="text-sm text-card-foreground/80 w-40 px-2">
-                      Avg Pen/gm:&#8199;
-                      <span className="text-card-foreground font-medium">
-                        {ref.penaltiesPerGame}
-                      </span>
-                    </p>
-                    <p className="text-sm text-card-foreground/80 w-40 px-2">
-                      Avg Pen Diff:&#8199;
-                      <span className="text-card-foreground font-medium">
-                        {ref.avgPenaltyDiff}
-                      </span>
-                    </p>
+                <div className="p-4 flex items-center gap-4 h-full">
+                  <div className="flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 text-primary font-bold text-3xl shrink-0">
+                    {referee.refNumber}
+                  </div>
+                  <div className="flex flex-col gap-2 flex-1 min-w-0">
+                    <h3 className="text-lg font-semibold truncate">{referee.name}</h3>
+                    <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
+                      <p className="whitespace-nowrap w-24">Games: {referee.totalGames}</p>
+                      <p className="whitespace-nowrap w-24">Grade: {referee.fairnessScore.grade || 'N/A'}</p>
+                      <p className="whitespace-nowrap w-24">Pen/gm: {typeof referee.minorsPerGame === 'number' ? referee.minorsPerGame.toFixed(2) : 'N/A'}</p>
+                      <p className="whitespace-nowrap w-24">Pen Diff: {typeof referee.avgPenaltyDiff === 'number' ? referee.avgPenaltyDiff.toFixed(2) : 'N/A'}</p>
+                    </div>
                   </div>
                 </div>
               </Link>
-            </motion.li>
-          );
-        })}
-      </ul>
+            </motion.div>
+          ))}
+        </div>
 
-      <div className="w-[calc(100%-40px)] max-w-[1520px] text-start">
-        <i className="text-muted-foreground">* NHL/AHL Official</i>
+        <div className="w-full text-start">
+          <i className="text-muted-foreground">* NHL/AHL Official</i>
+        </div>
       </div>
     </div>
   );

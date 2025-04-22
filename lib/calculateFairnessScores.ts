@@ -1,4 +1,4 @@
-type RefereeStatKey =
+export type RefereeStatKey =
   | "goalsPerGame"
   | "ppOpportunities"
   | "minorsPerGame"
@@ -9,14 +9,15 @@ type RefereeStatKey =
   | "homeWinPercentage"
   | "gamesToOT";
 
-type Referee = Record<RefereeStatKey, number | string> & {
-    name: string;
+export type Referee = Record<RefereeStatKey, number | string> & {
+  name: string;
+  refNumber: number | null;
+  totalGames: number;
 };
 
 type FairnessScore = {
   name: string;
   score: number; // 0–100, higher = more fair
-  zScores: Record<RefereeStatKey, number>;
   grade: string;
 };
 
@@ -34,7 +35,7 @@ function calculateStdDev(values: number[], mean: number): number {
   return Math.sqrt(variance);
 }
 
-function getFairnessScores(referees: Referee[]): FairnessScore[] {
+export function calculateFairnessScores(referees: Referee[]): FairnessScore[] {
   const keys: RefereeStatKey[] = [
     "goalsPerGame",
     "ppOpportunities",
@@ -89,17 +90,6 @@ function getFairnessScores(referees: Referee[]): FairnessScore[] {
   });
 
   const scores: FairnessScore[] = referees.map((ref) => {
-    const zScores: Record<RefereeStatKey, number> = {
-      goalsPerGame: 0,
-      ppOpportunities: 0,
-      minorsPerGame: 0,
-      penaltiesPerGame: 0,
-      pimPerGame: 0,
-      penaltyHomePercentage: 0,
-      avgPenaltyDiff: 0,
-      homeWinPercentage: 0,
-      gamesToOT: 0,
-    };
     let totalZ = 0;
     let totalWeight = 0;
 
@@ -107,34 +97,27 @@ function getFairnessScores(referees: Referee[]): FairnessScore[] {
       const val = parsePercent(ref[key]);
       const z = statStdDevs[key]! === 0 ? 0 : (val - statMeans[key]!) / statStdDevs[key]!;
       const absZ = Math.abs(z);
-      zScores[key] = absZ;
       totalZ += absZ * statWeights[key];
       totalWeight += statWeights[key];
     });
 
     const weightedAvgZ = totalZ / totalWeight;
     const fairnessScore = Math.max(0, Math.min(100, 100 - weightedAvgZ * 20));
+    const score = parseFloat(fairnessScore.toFixed(2));
+
+    // Score-based grading
+    let grade = "F";
+    if (score >= 90) grade = "A";
+    else if (score >= 80) grade = "B";
+    else if (score >= 70) grade = "C";
+    else if (score >= 60) grade = "D";
 
     return {
       name: ref.name,
-      score: parseFloat(fairnessScore.toFixed(2)),
-      zScores,
-      grade: "", // will assign below
+      score,
+      grade
     };
   });
 
-  // Score-based grading instead of percentile-based
-  scores.forEach((s) => {
-    if (s.score >= 90) s.grade = "A";
-    else if (s.score >= 80) s.grade = "B";
-    else if (s.score >= 70) s.grade = "C";
-    else if (s.score >= 60) s.grade = "D";
-    else s.grade = "F";
-  });
-
   return scores;
-}
-
-module.exports = {
-  getFairnessScores
-};
+} 
