@@ -233,7 +233,7 @@ export default function RefereeStats() {
 
         <div className="flex flex-col gap-2 w-full text-start">
           <i className="text-muted-foreground">* NHL/AHL Official</i>
-          <i className="text-muted-foreground">Huge thanks to the people over at <a href="https://scoutingtherefs.com/" target="_blank" className="text-secondary-foreground underline hover:text-primary">Scouting the Refs</a> for tracking andcompiling the data used in this project. Head there to see more data and news about the Professional Hockey Referees.</i>
+          <i className="text-muted-foreground">Huge thanks to the people over at <a href="https://scoutingtherefs.com/" target="_blank" className="text-secondary-foreground underline hover:text-primary">Scouting the Refs</a> for tracking and compiling the data used in this project. Head there to see more data and news about the Professional Hockey Referees.</i>
         </div> 
       </div>
     </div>
