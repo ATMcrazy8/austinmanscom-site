@@ -39,10 +39,13 @@ export default function getFairnessScores(referees: Referee[]): FairnessScore[] 
   const keys: RefereeStatKey[] = [
     "goalsPerGame",
     "ppOpportunities",
+    "minorsPerGame",
     "penaltiesPerGame",
+    "pimPerGame",
+    "penaltyHomePercentage",
     "avgPenaltyDiff",
     "homeWinPercentage",
-    "gamesToOT",
+    "gamesToOT"
   ];
 
   // Add weights for each stat - higher weight means more important
