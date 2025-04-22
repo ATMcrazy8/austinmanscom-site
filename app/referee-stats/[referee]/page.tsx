@@ -7,8 +7,10 @@ import RefereeRadar from "@/components/RefereeRadar";
 import { calculateFairnessScores } from "@/lib/calculateFairnessScores";
 import referees from "../../../data/referees.json";
 
-const formatPercent = (val: string | number) =>
-  `${parseFloat(String(val)).toFixed(2)}%`;
+const formatPercent = (val: string | number) => {
+  const num = typeof val === 'string' ? parseFloat(val.replace(/[^0-9.]/g, '')) : val;
+  return isNaN(num) ? '0%' : `${num.toFixed(2)}%`;
+};
 const averages = calculateAverages(referees);
 
 
@@ -37,10 +39,10 @@ function calculateAverages(data: typeof referees) {
     totals.minorsPerGame += ref.minorsPerGame;
     totals.penaltiesPerGame += ref.penaltiesPerGame;
     totals.pimPerGame += ref.pimPerGame;
-    totals.penaltyHomePercentage += parseFloat(ref.penaltyHomePercentage);
+    totals.penaltyHomePercentage += parseValue(ref.penaltyHomePercentage);
     totals.avgPenaltyDiff += ref.avgPenaltyDiff;
-    totals.homeWinPercentage += parseFloat(ref.homeWinPercentage);
-    totals.gamesToOT += parseFloat(ref.gamesToOT);
+    totals.homeWinPercentage += parseValue(ref.homeWinPercentage);
+    totals.gamesToOT += parseValue(ref.gamesToOT);
   });
 
   const divisor = data.length;
@@ -55,6 +57,16 @@ function calculateAverages(data: typeof referees) {
     homeWinPercentage: +(totals.homeWinPercentage / divisor).toFixed(2),
     gamesToOT: +(totals.gamesToOT / divisor).toFixed(2),
   };
+}
+
+function parseValue(val: string | number): number {
+  if (typeof val === "string") {
+    // Remove any non-numeric characters except decimal point
+    const cleanVal = val.replace(/[^0-9.]/g, "");
+    const parsed = parseFloat(cleanVal);
+    return isNaN(parsed) ? 0 : parsed;
+  }
+  return val;
 }
 
 function calculateRank(
