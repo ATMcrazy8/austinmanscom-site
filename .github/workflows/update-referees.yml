@@ -21,13 +21,10 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install
-          npm install -D typescript @types/node
-
-      - name: Build TypeScript Files
-        run: npx tsc -p tsconfig.build.json
+          npm install -D tsx
 
       - name: Run Update Script
-        run: node scripts/updateReferees.mjs
+        run: npx tsx scripts/updateReferees.mjs
 
       - name: Commit and Push Changes
         run: |
