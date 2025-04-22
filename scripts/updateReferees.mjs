@@ -15,31 +15,17 @@ async function scrapeRefereeData() {
     console.log("🌍 Navigating to page...");
     await page.goto(REFEREE_STATS_URL, { waitUntil: "networkidle2" });
 
-    await page.goto(REFEREE_STATS_URL, {
-      waitUntil: "domcontentloaded", // or "networkidle0" if it's slow
-    });
-
-    console.log("⏳ Checking if the table exists...");
-    const tableExists = await page.evaluate(
-      () => !!document.querySelector("#tablepress-226 tbody")
-    );
-    if (!tableExists) {
-      throw new Error(
-        "❌ Table not found on the page. Website structure may have changed."
-      );
-    }
-    console.log("✅ Table found! Proceeding with data extraction...");
-
-    console.log("🔄 Waiting for table to load...");
+    console.log("⏳ Waiting for table to load...");
     await page.waitForSelector("#tablepress-226 tbody tr");
 
     console.log("📦 Extracting referee data...");
     const referees = await page.evaluate(() => {
-      return Array.from(
-        document.querySelectorAll("#tablepress-226 tbody tr")
-      ).map((row) => {
+      const rows = Array.from(document.querySelectorAll("#tablepress-226 tbody tr"));
+      console.log(`Found ${rows.length} rows in the table`);
+      
+      return rows.map((row) => {
         const cells = row.querySelectorAll("td");
-        return {
+        const data = {
           name: cells[0]?.innerText.trim() || "Unknown",
           refNumber: parseInt(cells[1]?.innerText.trim()) || null,
           totalGames: parseInt(cells[2]?.innerText.trim()) || 0,
@@ -53,6 +39,8 @@ async function scrapeRefereeData() {
           homeWinPercentage: cells[10]?.innerText.trim(),
           gamesToOT: cells[11]?.innerText.trim(),
         };
+        console.log(`Processed referee: ${data.name} (${data.totalGames} games)`);
+        return data;
       });
     });
 
@@ -67,6 +55,7 @@ async function scrapeRefereeData() {
     const validReferees = referees.filter(
       (ref) => ref.name !== "Unknown" && ref.name !== "NHL Average"
     );
+    console.log(`✅ Filtered to ${validReferees.length} valid referees.`);
 
     // Calculate fairness scores
     console.log("📊 Calculating fairness scores...");
@@ -87,12 +76,14 @@ async function scrapeRefereeData() {
     });
 
     const filePath = path.join(process.cwd(), "data", "referees.json");
+    console.log(`📝 Writing data to ${filePath}...`);
     fs.writeFileSync(filePath, JSON.stringify(refereesWithScores, null, 2));
+    console.log("✅ Data written successfully!");
 
-    console.log("✅ Referees data updated successfully!");
     await browser.close();
   } catch (error) {
     console.error("❌ Error scraping referee data:", error);
+    process.exit(1); // Exit with error code to fail the workflow
   }
 }
 

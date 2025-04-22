@@ -8,10 +8,15 @@ on:
 jobs:
   update_data:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Fetch all history for all branches and tags
 
       - name: Set Up Node.js
         uses: actions/setup-node@v3
@@ -26,10 +31,15 @@ jobs:
       - name: Run Update Script
         run: npx tsx scripts/updateReferees.mjs
 
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "github-actions@github.com"
+
       - name: Commit and Push Changes
         run: |
-          git config --local user.email "github-actions@github.com"
-          git config --local user.name "GitHub Actions"
           git add data/referees.json
-          git commit -m "Automated referee data update" || exit 0  # Prevent failure if no changes
+          git status
+          git commit -m "Automated referee data update" || exit 0
+          git pull --rebase
           git push
