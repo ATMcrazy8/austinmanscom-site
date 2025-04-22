@@ -9,7 +9,17 @@ const REFEREE_STATS_URL =
 async function scrapeRefereeData() {
   try {
     console.log("🚀 Launching Puppeteer...");
-    const browser = await puppeteer.launch({ headless: "new" });
+    const browser = await puppeteer.launch({
+      headless: "new",
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-accelerated-2d-canvas',
+        '--disable-gpu',
+        '--window-size=1920x1080',
+      ],
+    });
     const page = await browser.newPage();
 
     console.log("🌍 Navigating to page...");
