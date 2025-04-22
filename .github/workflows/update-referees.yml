@@ -26,10 +26,13 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install
-          npm install -D tsx
+          npm install -D typescript @types/node
+
+      - name: Build TypeScript
+        run: npx tsc
 
       - name: Run Update Script
-        run: npx tsx scripts/updateReferees.mjs
+        run: node dist/scripts/updateReferees.mjs
 
       - name: Configure Git
         run: |
