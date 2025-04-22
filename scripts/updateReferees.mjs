@@ -1,7 +1,6 @@
 import puppeteer from "puppeteer";
 import fs from "fs";
 import path from "path";
-const { getFairnessScores } = require("../lib/getFairnessScores.ts");
 
 const REFEREE_STATS_URL =
   "https://scoutingtherefs.com/2024-25-nhl-referee-stats/";
@@ -35,7 +34,7 @@ async function scrapeRefereeData() {
       
       return rows.map((row) => {
         const cells = row.querySelectorAll("td");
-        const data = {
+        return {
           name: cells[0]?.innerText.trim() || "Unknown",
           refNumber: parseInt(cells[1]?.innerText.trim()) || null,
           totalGames: parseInt(cells[2]?.innerText.trim()) || 0,
@@ -49,8 +48,6 @@ async function scrapeRefereeData() {
           homeWinPercentage: cells[10]?.innerText.trim(),
           gamesToOT: cells[11]?.innerText.trim(),
         };
-        console.log(`Processed referee: ${data.name} (${data.totalGames} games)`);
-        return data;
       });
     });
 
@@ -61,41 +58,22 @@ async function scrapeRefereeData() {
       return;
     }
 
-    // Filter out "Unknown" and "NHL Average" before calculating scores
+    // Filter out "Unknown" and "NHL Average"
     const validReferees = referees.filter(
       (ref) => ref.name !== "Unknown" && ref.name !== "NHL Average"
     );
     console.log(`✅ Filtered to ${validReferees.length} valid referees.`);
 
-    // Calculate fairness scores
-    console.log("📊 Calculating fairness scores...");
-    const fairnessScores = getFairnessScores(validReferees);
-    console.log(`✅ Calculated scores for ${fairnessScores.length} referees.`);
-    
-    // Add fairness scores to referee data
-    const refereesWithScores = validReferees.map(ref => {
-      const score = fairnessScores.find(s => s.name === ref.name);
-      if (!score) {
-        console.warn(`⚠️ No score found for referee: ${ref.name}`);
-      }
-      return {
-        ...ref,
-        fairnessScore: score?.score ?? 0,
-        fairnessGrade: score?.grade ?? "F"
-      };
-    });
-
     const filePath = path.join(process.cwd(), "data", "referees.json");
     console.log(`📝 Writing data to ${filePath}...`);
-    fs.writeFileSync(filePath, JSON.stringify(refereesWithScores, null, 2));
+    fs.writeFileSync(filePath, JSON.stringify(validReferees, null, 2));
     console.log("✅ Data written successfully!");
 
     await browser.close();
   } catch (error) {
     console.error("❌ Error scraping referee data:", error);
-    process.exit(1); // Exit with error code to fail the workflow
+    process.exit(1);
   }
 }
 
-// Run the script
 scrapeRefereeData();

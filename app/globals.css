@@ -121,6 +121,19 @@ body {
   }
 }
 
+@keyframes progress-fill {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--progress-width);
+  }
+}
+
+.animate-progress-fill {
+  animation: progress-fill 1s ease-out forwards;
+}
+
 .animate-border-flash {
   background-size: 300% 100%;
   animation: borderFlash 16s ease-in-out infinite;
