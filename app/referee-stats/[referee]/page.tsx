@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import { slugify } from "@/lib/slugify";
 import RefereeRadar from "@/components/RefereeRadar";
 import referees from "../../../data/referees.json";
-import { getFairnessScores } from "@/lib/getFairnessScores";
 
 
 const formatPercent = (val: string | number) =>

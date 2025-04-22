@@ -76,8 +76,8 @@ export function getFairnessScores(referees: Referee[]): FairnessScore[] {
     });
   });
 
-  const statMeans: Record<RefereeStatKey, number> = {} as any;
-  const statStdDevs: Record<RefereeStatKey, number> = {} as any;
+  const statMeans: Partial<Record<RefereeStatKey, number>> = {};
+  const statStdDevs: Partial<Record<RefereeStatKey, number>> = {};
 
   keys.forEach((key) => {
     const mean = calculateMean(statArrays[key]);
@@ -87,13 +87,23 @@ export function getFairnessScores(referees: Referee[]): FairnessScore[] {
   });
 
   const scores: FairnessScore[] = referees.map((ref) => {
-    const zScores: Record<RefereeStatKey, number> = {} as any;
+    const zScores: Record<RefereeStatKey, number> = {
+      goalsPerGame: 0,
+      ppOpportunities: 0,
+      minorsPerGame: 0,
+      penaltiesPerGame: 0,
+      pimPerGame: 0,
+      penaltyHomePercentage: 0,
+      avgPenaltyDiff: 0,
+      homeWinPercentage: 0,
+      gamesToOT: 0,
+    };
     let totalZ = 0;
     let totalWeight = 0;
 
     keys.forEach((key) => {
       const val = parsePercent(ref[key]);
-      const z = statStdDevs[key] === 0 ? 0 : (val - statMeans[key]) / statStdDevs[key];
+      const z = statStdDevs[key]! === 0 ? 0 : (val - statMeans[key]!) / statStdDevs[key]!;
       const absZ = Math.abs(z);
       zScores[key] = absZ;
       totalZ += absZ * statWeights[key];
