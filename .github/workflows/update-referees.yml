@@ -32,7 +32,7 @@ jobs:
         run: npx tsc
 
       - name: Run Update Script
-        run: node --experimental-modules dist/scripts/updateReferees.mjs
+        run: node --experimental-modules --es-module-specifier-resolution=node dist/scripts/updateReferees.mjs
 
       - name: Configure Git
         run: |
