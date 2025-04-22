@@ -1,4 +1,4 @@
-export type RefereeStatKey =
+type RefereeStatKey =
   | "goalsPerGame"
   | "ppOpportunities"
   | "minorsPerGame"
@@ -9,11 +9,11 @@ export type RefereeStatKey =
   | "homeWinPercentage"
   | "gamesToOT";
 
-export type Referee = Record<RefereeStatKey, number | string> & {
+type Referee = Record<RefereeStatKey, number | string> & {
     name: string;
 };
 
-export type FairnessScore = {
+type FairnessScore = {
   name: string;
   score: number; // 0–100, higher = more fair
   zScores: Record<RefereeStatKey, number>;
@@ -34,7 +34,7 @@ function calculateStdDev(values: number[], mean: number): number {
   return Math.sqrt(variance);
 }
 
-export function getFairnessScores(referees: Referee[]): FairnessScore[] {
+function getFairnessScores(referees: Referee[]): FairnessScore[] {
   const keys: RefereeStatKey[] = [
     "goalsPerGame",
     "ppOpportunities",
@@ -134,3 +134,7 @@ export function getFairnessScores(referees: Referee[]): FairnessScore[] {
 
   return scores;
 }
+
+module.exports = {
+  getFairnessScores
+};
