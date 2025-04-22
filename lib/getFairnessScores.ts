@@ -35,7 +35,7 @@ function calculateStdDev(values: number[], mean: number): number {
   return Math.sqrt(variance);
 }
 
-export function getFairnessScores(referees: Referee[]): FairnessScore[] {
+export default function getFairnessScores(referees: Referee[]): FairnessScore[] {
   const keys: RefereeStatKey[] = [
     "goalsPerGame",
     "ppOpportunities",
