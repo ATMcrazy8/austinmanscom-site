@@ -2,7 +2,7 @@ name: Update Referee Data
 
 on:
   schedule:
-    - cron: "0 0 * * *"  # Runs every day at midnight UTC
+    - cron: "0 0 * * *"  # Runs every day at midnight UTC (12:00 AM)
   workflow_dispatch:  # Allows manual triggering from GitHub Actions UI
 
 jobs:
@@ -19,10 +19,12 @@ jobs:
           node-version: 18
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install
+          npm install -D typescript @types/node
 
       - name: Build TypeScript Files
-        run: npx tsc lib/getFairnessScores.ts --outDir dist/lib --module esnext --target es2020
+        run: npx tsc -p tsconfig.build.json
 
       - name: Run Update Script
         run: node scripts/updateReferees.mjs
