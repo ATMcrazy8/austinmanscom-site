@@ -178,7 +178,7 @@ export default async function RefereePage({ params }: PageProps) {
 
   return (
     <div className="w-full min-h-screen bg-background">
-      <div className="w-[calc(100%-40px)] max-w-[1520px] mx-auto py-6">
+      <div className="flex flex-col w-[calc(100%-40px)] max-w-[1520px] mx-auto py-6 gap-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-12">
           <div className="flex flex-col gap-10">
             <div className="flex items-center gap-4">
@@ -310,6 +310,11 @@ export default async function RefereePage({ params }: PageProps) {
             })}
           </div>
         </div>
+        
+        <div className="flex flex-col gap-2 w-full text-start">
+          <i className="text-muted-foreground">* NHL/AHL Official</i>
+          <i className="text-muted-foreground">Huge thanks to the people over at <a href="https://scoutingtherefs.com/" target="_blank" className="text-secondary-foreground underline hover:text-primary">Scouting the Refs</a> for tracking andcompiling the data used in this project. Head there to see more data and news about the Professional Hockey Referees.</i>
+        </div>  
       </div>
     </div>
   );
