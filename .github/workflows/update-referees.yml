@@ -21,6 +21,9 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Build TypeScript Files
+        run: npx tsc lib/getFairnessScores.ts --outDir dist/lib --module esnext --target es2020
+
       - name: Run Update Script
         run: node scripts/updateReferees.mjs
 
