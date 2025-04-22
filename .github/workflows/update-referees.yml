@@ -38,8 +38,20 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
+          # Stage only the referees.json file
           git add data/referees.json
-          git status
-          git commit -m "Automated referee data update" || exit 0
-          git pull --rebase
-          git push
+          
+          # Check if there are any changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          
+          # Commit the changes
+          git commit -m "Automated referee data update"
+          
+          # Pull latest changes without rebase
+          git pull origin master
+          
+          # Push the changes
+          git push origin master
