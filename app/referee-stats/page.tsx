@@ -14,9 +14,11 @@ type Referee = {
   penaltiesPerGame: number;
   pimPerGame: number;
   avgPenaltyDiff: number;
+  fairnessScore?: number;
+  fairnessGrade?: string;
 };
 
-type SortKey = "lastName" | "refNumber" | "totalGames";
+type SortKey = "lastName" | "refNumber" | "totalGames" | "fairnessScore";
 type SortDirection = "asc" | "desc";
 
 export default function RefereeStats() {
@@ -24,6 +26,7 @@ export default function RefereeStats() {
   const [loading, setLoading] = useState(true);
   const [sortBy, setSortBy] = useState<SortKey>("lastName");
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
+  const [gradeFilter, setGradeFilter] = useState<string>("all");
 
   useEffect(() => {
     fetch("/api/referees")
@@ -34,29 +37,35 @@ export default function RefereeStats() {
       });
   }, []);
 
-  const sortedReferees = [...referees].sort((a, b) => {
-    if (sortBy === "lastName") {
-      const getLastName = (name: string) => {
-        const cleaned = name.replace(/\*/g, "").trim();
-        const parts = cleaned.split(",");
-        return parts.length > 1
-          ? parts[0].trim().toLowerCase()
-          : cleaned.split(" ").slice(-1)[0].toLowerCase();
-      };
-      return sortDirection === "asc"
-        ? getLastName(a.name).localeCompare(getLastName(b.name))
-        : getLastName(b.name).localeCompare(getLastName(a.name));
-    } else if (sortBy === "refNumber") {
-      return sortDirection === "asc"
-        ? a.refNumber - b.refNumber
-        : b.refNumber - a.refNumber;
-    } else if (sortBy === "totalGames") {
-      return sortDirection === "asc"
-        ? a.totalGames - b.totalGames
-        : b.totalGames - a.totalGames;
-    }
-    return 0;
-  });
+  const sortedReferees = [...referees]
+    .filter(ref => gradeFilter === "all" || ref.fairnessGrade === gradeFilter)
+    .sort((a, b) => {
+      if (sortBy === "lastName") {
+        const getLastName = (name: string) => {
+          const cleaned = name.replace(/\*/g, "").trim();
+          const parts = cleaned.split(",");
+          return parts.length > 1
+            ? parts[0].trim().toLowerCase()
+            : cleaned.split(" ").slice(-1)[0].toLowerCase();
+        };
+        return sortDirection === "asc"
+          ? getLastName(a.name).localeCompare(getLastName(b.name))
+          : getLastName(b.name).localeCompare(getLastName(a.name));
+      } else if (sortBy === "refNumber") {
+        return sortDirection === "asc"
+          ? a.refNumber - b.refNumber
+          : b.refNumber - a.refNumber;
+      } else if (sortBy === "totalGames") {
+        return sortDirection === "asc"
+          ? a.totalGames - b.totalGames
+          : b.totalGames - a.totalGames;
+      } else if (sortBy === "fairnessScore") {
+        return sortDirection === "asc"
+          ? (a.fairnessScore || 0) - (b.fairnessScore || 0)
+          : (b.fairnessScore || 0) - (a.fairnessScore || 0);
+      }
+      return 0;
+    });
 
   if (loading)
     return (
@@ -77,7 +86,7 @@ export default function RefereeStats() {
           NHL Referees
         </h1>
 
-        <div className="flex gap-4 mb-6">
+        <div className="flex flex-wrap gap-4 mb-6">
           <label className="text-sm text-muted-foreground">
             Sort by:
             <select
@@ -88,6 +97,7 @@ export default function RefereeStats() {
               <option value="lastName">Last Name</option>
               <option value="refNumber">Ref Number</option>
               <option value="totalGames">Games Worked</option>
+              <option value="fairnessScore">Fairness Score</option>
             </select>
           </label>
 
@@ -104,10 +114,28 @@ export default function RefereeStats() {
               <option value="desc">Descending</option>
             </select>
           </label>
+
+          {sortBy === "fairnessScore" && (
+            <label className="text-sm text-muted-foreground">
+              Filter by Grade:
+              <select
+                value={gradeFilter}
+                onChange={(e) => setGradeFilter(e.target.value)}
+                className="ml-2 p-1 border rounded bg-background text-foreground"
+              >
+                <option value="all">All Grades</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="F">F</option>
+              </select>
+            </label>
+          )}
         </div>
       </div>
 
-      <ul className="space-y-4 w-[calc(100%-40px)] max-w-[1520px]">
+      <ul className="w-[calc(100%-40px)] max-w-[1520px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {sortedReferees.map((ref) => {
           const slug = slugify(ref.name);
           return (
@@ -130,7 +158,8 @@ export default function RefereeStats() {
                     {ref.refNumber}
                   </p>
                 </div>
-                <div className="flex flex-col p-4 border-l-[1px] border-border gap-2">
+                
+                <div className="flex flex-col w-full p-4">
                   <h2 className="text-xl text-monotone-foreground font-semibold">
                     {ref.name}
                   </h2>
@@ -141,16 +170,18 @@ export default function RefereeStats() {
                         {ref.totalGames}
                       </span>
                     </p>
+                    {ref.fairnessScore && (
+                      <p className="text-sm text-card-foreground/80 w-40 px-2">
+                        Fairness:&#8199;
+                        <span className="text-card-foreground font-medium">
+                          {ref.fairnessGrade} ({ref.fairnessScore.toFixed(1)})
+                        </span>
+                      </p>
+                    )}
                     <p className="text-sm text-card-foreground/80 w-40 px-2">
                       Avg Pen/gm:&#8199;
                       <span className="text-card-foreground font-medium">
                         {ref.penaltiesPerGame}
-                      </span>
-                    </p>
-                    <p className="text-sm text-card-foreground/80 w-40 px-2">
-                      Avg PIM/gm:&#8199;
-                      <span className="text-card-foreground font-medium">
-                        {ref.pimPerGame}
                       </span>
                     </p>
                     <p className="text-sm text-card-foreground/80 w-40 px-2">

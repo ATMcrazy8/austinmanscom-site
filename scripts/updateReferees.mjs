@@ -1,6 +1,7 @@
 import puppeteer from "puppeteer";
 import fs from "fs";
 import path from "path";
+import { getFairnessScores } from "./lib/getFairnessScores.js";
 
 const REFEREE_STATS_URL =
   "https://scoutingtherefs.com/2024-25-nhl-referee-stats/";
@@ -62,8 +63,22 @@ async function scrapeRefereeData() {
       return;
     }
 
+    // Calculate fairness scores
+    console.log("📊 Calculating fairness scores...");
+    const fairnessScores = getFairnessScores(referees);
+    
+    // Add fairness scores to referee data
+    const refereesWithScores = referees.map(ref => {
+      const score = fairnessScores.find(s => s.name === ref.name);
+      return {
+        ...ref,
+        fairnessScore: score?.score,
+        fairnessGrade: score?.grade
+      };
+    });
+
     const filePath = path.join(process.cwd(), "data", "referees.json");
-    const filteredReferees = referees.filter(
+    const filteredReferees = refereesWithScores.filter(
       (ref) => ref.name !== "Unknown" && ref.name !== "NHL Average"
     );
     fs.writeFileSync(filePath, JSON.stringify(filteredReferees, null, 2));

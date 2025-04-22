@@ -11,7 +11,9 @@
     "penaltyHomePercentage": "49%",
     "avgPenaltyDiff": 1.5,
     "homeWinPercentage": "52%",
-    "gamesToOT": "20%"
+    "gamesToOT": "20%",
+    "fairnessScore": 83.3,
+    "fairnessGrade": "B"
   },
   {
     "name": "Halkidis, Beau *",

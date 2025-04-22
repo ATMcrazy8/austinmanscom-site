@@ -96,7 +96,7 @@ export default function Home() {
                   <Icon className="w-5 h-5 shrink-0 stroke-accent" />
                   <div className="flex flex-col">
                     <span className="text-xs text-accent">{label}</span>
-                    <span className="text-primary-foreground text-md font-mono">{value}</span>
+                    <span className="text-primary-foreground text-md font-semibold">{value}</span>
                   </div>
                 </a>
               </li>
