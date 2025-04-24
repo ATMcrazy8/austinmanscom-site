@@ -43,12 +43,12 @@ export default function Home() {
         <BackgroundStripes />
 
         <div className="flex flex-col items-center w-full max-w-[calc(100%-40px)] z-10">
-          <h1 className="text-3xl md:text-5xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-monotone-foreground via-card-foreground to-monotone-foreground pb-1 text-balance">
+          <h1 className="text-3xl md:text-5xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-foreground via-secondary-foreground to-foreground pb-2 text-balance not-prose leading-tight">
             Modern Web Development &amp; Design
           </h1>
-          <i className="max-w-[99.24%] sm:max-w-[88.5%] text-balance text-xs md:text-base text-foreground/80 mb-8">
-            Custom web development services for fast, accessible, and
-            SEO-friendly websites that drive engagement.
+          <i className="max-w-[99.24%] sm:max-w-[88.5%] text-balance text-xs md:text-base text-foreground/80 mb-8 not-prose">
+            Web development services for fast, accessible, and
+            SEO-friendly websites.
           </i>
           {/* <button
             onClick={() => document.getElementById("showcase")?.scrollIntoView({ behavior: "smooth" })}

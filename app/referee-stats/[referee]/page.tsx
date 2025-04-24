@@ -113,12 +113,12 @@ export default async function RefereePage({ params }: PageProps) {
   const photoPath = path.join(
     process.cwd(),
     "public/ref-photos",
-    `${refereeSlug}.jpg`
+    `${refereeSlug}.webp`
   );
   const hasPhoto = fs.existsSync(photoPath);
   const photoUrl = hasPhoto
-    ? `/ref-photos/${refereeSlug}.jpg`
-    : `/ref-photos/fallback.jpg`;
+    ? `/ref-photos/${refereeSlug}.webp`
+    : `/ref-photos/fallback.webp`;
 
   const statsToShow: {
     label: string;

@@ -9,10 +9,10 @@
     <circle cx="64" cy="64" r="60" fill="white" />
     
     <g stroke="black" stroke-width="6" stroke-linecap="round" stroke-linejoin="miter">
-        <!-- "A" with strictly parallel sides to "M", maintaining distinct shapes -->
+        <!-- "A" -->
         <path d="M40 88 L64 24 L88 88" />
         
-        <!-- "M" with parallel outer sides matching "A", corrected valley position -->
+        <!-- "M" -->
         <path d="M24 88 L48 24 L64 60 L80 24 L104 88" />
     </g>
 </svg>
