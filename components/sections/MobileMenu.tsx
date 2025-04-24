@@ -52,16 +52,16 @@ export default function MobileMenu() {
           </SheetClose>
 
           {/* Navigation Accordion */}
-          <Accordion type="single" collapsible className="w-full px-2">
+          <Accordion type="single" collapsible className="w-full">
             {/* Projects Section */}
-            <AccordionItem value="projects">
-              <AccordionTrigger className="text-lg text-foreground font-semibold">
+            <AccordionItem value="projects" className="border-none">
+              <AccordionTrigger className="text-lg text-foreground font-semibold py-4 px-2 hover:text-primary hover:bg-muted/20 transition-colors rounded-md">
                 Projects
               </AccordionTrigger>
               <AccordionContent className="flex flex-col gap-2">
                 <SheetClose asChild>
                   <button
-                    className="w-full text-left px-4 py-2 hover:text-primary hover:bg-muted/20 transition-colors rounded-md"
+                    className="w-full text-left py-2 px-4 hover:text-primary hover:bg-muted/20 transition-colors rounded-md"
                     onClick={() => router.push("/referee-stats")}
                   >
                     Referee Stats
@@ -70,9 +70,19 @@ export default function MobileMenu() {
               </AccordionContent>
             </AccordionItem>
 
+            {/* Blog Section */}
+            <SheetClose asChild>
+              <button
+                className="flex items-center py-4 px-2 text-lg font-semibold text-foreground hover:text-primary hover:bg-muted/20 transition-colors rounded-md w-full"
+                onClick={() => router.push("/blog")}
+              >
+                Blog
+              </button>
+            </SheetClose>
+
             {/* Theme Section */}
-            <AccordionItem value="theme">
-              <AccordionTrigger className="text-lg text-foreground font-semibold">
+            <AccordionItem value="theme" className="border-none">
+              <AccordionTrigger className="text-lg text-foreground font-semibold py-4 px-2 hover:text-primary hover:bg-muted/20 transition-colors rounded-md">
                 Theme
               </AccordionTrigger>
               <AccordionContent className="flex flex-col gap-2">
@@ -80,19 +90,19 @@ export default function MobileMenu() {
                 {themes.map((themeName) => (
                   <button
                     key={themeName}
-                    className={`w-full text-left px-4 py-2 hover:text-primary hover:bg-muted/20 transition-colors rounded-md ${
+                    className={`w-full text-left py-2 px-4 hover:text-primary hover:bg-muted/20 transition-colors rounded-md ${
                       theme === themeName
                         ? "bg-primary text-primary-foreground"
                         : "text-foreground"
                     }`}
-                    onClick={() => setTheme(themeName)} // Switches theme but keeps menu open
+                    onClick={() => setTheme(themeName)}
                   >
                     {themeName.charAt(0).toUpperCase() + themeName.slice(1)}
                   </button>
                 ))}
 
                 {/* Dark Mode Toggle */}
-                <div className="flex items-center justify-between px-4 pt-4 border-t border-border">
+                <div className="flex items-center justify-between py-2 px-4 border-t border-border">
                   <span className="text-sm">Dark Mode</span>
                   <label className="relative inline-flex items-center cursor-pointer">
                     <input
@@ -109,10 +119,10 @@ export default function MobileMenu() {
             </AccordionItem>
           </Accordion>
 
-          {/* Contact Button (Closes the Sheet) */}
+          {/* Contact Button */}
           <SheetClose asChild>
             <button
-              className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-ring transition-colors"
+              className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-ring transition-colors mt-4"
               onClick={() => router.push("/#contact")}
             >
               Contact Me
