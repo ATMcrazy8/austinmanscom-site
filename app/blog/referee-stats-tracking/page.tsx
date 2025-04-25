@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { BlogPostLayout } from "@/components/blog/BlogPostLayout";
 import LighthouseGauge from "@/components/LighthouseGauge";
 import Image from "next/image";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Building a Referee Performance Analytics Platform",
@@ -30,6 +31,10 @@ export default function RefereeStatsPost() {
       <p className="text-xl mb-8">
         While this project began as a simple idea to track basic stats, it eventually evolved into a comprehensive platform that transforms real game data from the NHL season into meaningful insights about the performance of the officials.
       </p>
+      <Link href="/referee-stats" className="text-xl mb-8">
+        View the full referee stat tracker
+      </Link>
+
 
       <Image 
         src="/blog-assets/ref-stats/ref_stat_heading.webp"
@@ -171,12 +176,28 @@ export default function RefereeStatsPost() {
 
       <section className="mb-12">
         <h3 className="text-2xl font-medium mb-4">Lessons Learned</h3>
-        <p className="mb-4">This project taught me valuable lessons about:</p>
+        <p className="mb-4">I chose a project like this intentionally, partially because I have a genuine interest and some background knowledge about the NHL and hockey, and partially because I wanted to challenge myself to learn new things. This project taught me many valuable lessons.</p>
         <ul className="list-disc pl-6 space-y-2">
-          <li>Building scalable data processing systems</li>
-          <li>Creating effective data visualizations</li>
-          <li>Optimizing performance in data-heavy applications</li>
-          <li>Balancing technical complexity with user experience</li>
+          <li>
+            <strong>Working with real-world data:</strong>
+            <br />
+            I had to figure out how to scrape stats from an external source, clean it up, shape it into something usable, and store it in a way that was both efficient and easy to work with inside the app.
+          </li>
+          <li>
+            <strong>Visualizing data that actually means something:</strong>
+            <br />
+            I dove into libraries like Recharts and shadcn/ui to build a dual-layer radar chart that could clearly compare a ref’s numbers to the league average. One tricky bit was making the visual style consistent across themes — blending dynamic user-set colors with a fixed one for the league average wasn’t exactly plug-and-play. Took some trial and error, but I’m happy with where it landed.
+          </li>
+          <li>
+            <strong>Keeping things fast, even with a lot of data:</strong>
+            <br />
+            When you’re working with large datasets, performance matters. While this isn't the most data intensive project when compared to enterprise level applications, I quickly learned that I'd need to strike a balance between client-side calculations and server-side rendering and caching strategies to keep load times quick and keep the project up to date and accurate. I also leverage some GitHub Actions to automate the process of scraping the data and updating the project.
+          </li>
+          <li>
+            <strong>Making complexity feel simple:</strong>
+            <br />
+            There’s a lot going on under the hood, but the goal was always to make the experience feel effortless for users. I kept refining little details — like adding tooltips, sort/filter controls, and a single “fairness score” that rolls multiple advanced stats into one digestible grade — so the whole thing feels intuitive without watering down the data.
+          </li>
         </ul>
       </section>
 
