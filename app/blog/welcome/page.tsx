@@ -1,12 +1,13 @@
 import { Metadata } from "next";
 import { BlogPostLayout } from "@/components/blog/BlogPostLayout";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Welcome to My Blog",
-  description: "Join me as I share my journey through web development, data analysis, and the intersection of technology and sports.",
+  description: "A space to build, break, and learn out loud.",
   openGraph: {
     title: "Welcome to My Blog",
-    description: "Join me as I share my journey through web development, data analysis, and the intersection of technology and sports.",
+    description: "A space to build, break, and learn out loud.",
     type: "article",
     publishedTime: "2024-03-19",
     tags: ["Web Development", "Blog"],
@@ -20,75 +21,77 @@ export default function WelcomePost() {
       date="2024-03-19"
       tags={["Web Development", "Blog"]}
     >
-      <h2 className="text-4xl font-medium mb-8">Hey There! Let's Build Something Together</h2>
-      
+      <h2 className="text-4xl font-medium mb-8">Hey, I'm Austin — Glad You're Here</h2>
+
       <p className="text-xl mb-8">
-        Welcome to my corner of the internet! I'm Austin, and I'm excited to share my journey with you through this blog. 
-        Whether you're a fellow developer, a sports enthusiast, or just someone curious about technology, 
-        I hope you'll find something interesting here.
+        Thanks for dropping in! I built this blog as a space to document what I'm working on,
+        share how I'm building things, and maybe help someone else along the way.
+        If you’re into clean code, cool tools, and learning in public — you’ll feel right at home here.
       </p>
 
       <section className="mb-12">
-        <h3 className="text-2xl font-medium mb-4">What to Expect</h3>
-        <p className="mb-4">This blog will be a mix of:</p>
+        <h3 className="text-2xl font-medium mb-4">What You’ll Find Here</h3>
+        <p className="mb-4">This isn't just a portfolio — it’s a workbench. Expect posts on:</p>
         <ul className="list-disc pl-6 space-y-2">
-          <li>Deep dives into my projects (like the referee stats tracker)</li>
-          <li>Technical tutorials and how-tos</li>
-          <li>Thoughts on web development and data analysis</li>
-          <li>The occasional sports analytics post (because why not combine my passions?)</li>
+          <li>Breakdowns of projects I've worked on</li>
+          <li>UI, UX, and the decisions behind them</li>
+          <li>Data. Because I'm a nerd at heart and I can’t help myself</li>
+          <li>And maybe some other things as they relate to my career and the development world in general</li>
         </ul>
 
-        <p className="mt-6 mb-4">I'm particularly passionate about:</p>
+        <p className="mt-6 mb-4">I'm especially interested in:</p>
         <ul className="list-disc pl-6 space-y-2">
-          <li>Building clean, efficient web applications</li>
-          <li>Turning raw data into meaningful insights</li>
-          <li>Creating tools that solve real problems</li>
-          <li>Making complex topics accessible and interesting</li>
+          <li>Building smooth, fast web apps that feel good to use</li>
+          <li>Turning messy data into something useful</li>
+          <li>Designing tools that solve real-world problems</li>
+          <li>Making technical stuff a little easier to understand</li>
+          <li>Styling and creativity in design. I'm still learning a lot here but the more I play around in this realm, the more I realize how much I still have to learn.</li>
         </ul>
       </section>
 
       <section className="mb-12">
-        <h3 className="text-2xl font-medium mb-4">Why I'm Writing</h3>
+        <h3 className="text-2xl font-medium mb-4">Why I’m Writing</h3>
         <p className="mb-4">
-          I believe in learning in public and sharing knowledge. Each post will be a chance to:
+          This blog isn’t just about showing off the final product — it's about sharing the process. I want to:
         </p>
         <ul className="list-disc pl-6 space-y-2">
-          <li>Document my learning process</li>
-          <li>Share solutions to interesting problems</li>
-          <li>Get feedback from the community</li>
-          <li>Help others who might be facing similar challenges</li>
+          <li>Write down what I’m learning (so I actually remember it)</li>
+          <li>Offer useful ideas or patterns to anyone facing similar challenges</li>
+          <li>Learn from feedback and different perspectives</li>
         </ul>
       </section>
 
       <section className="mb-12">
-        <h3 className="text-2xl font-medium mb-4">The Tech Stack</h3>
-        <p className="mb-4">Most of my projects use:</p>
+        <h3 className="text-2xl font-medium mb-4">What I’m Building With</h3>
+        <p className="mb-4">Right now, most of my stack looks like this:</p>
         <ul className="list-disc pl-6 space-y-2">
-          <li>Next.js for the frontend</li>
-          <li>TypeScript for type safety</li>
-          <li>Tailwind CSS for styling</li>
-          <li>Various data processing and visualization libraries</li>
+          <li>Next.js (App Router, React.js, TypeScript, Tailwind CSS) for routing and structuring the site</li>
+          <li>Framer Motion for animations</li>
+          <li>A mix of libraries for data wrangling and visualization (like Recharts)</li>
+          <li>Shadcn/ui for components</li>
+          <li>Vercel for hosting</li>
         </ul>
         <p className="mt-4">
-          But I'm always exploring new tools and technologies, so expect to see some experimentation along the way!
+          I’m always experimenting though, so things may evolve over time.
         </p>
       </section>
 
       <section className="mb-12">
-        <h3 className="text-2xl font-medium mb-4">Let's Connect</h3>
+        <h3 className="text-2xl font-medium mb-4">Let’s Stay in Touch</h3>
         <p className="mb-4">
-          I'd love to hear your thoughts, questions, or suggestions. Feel free to:
+          I’d love to hear from you — whether it’s a question, suggestion, or just a quick hello.
         </p>
         <ul className="list-disc pl-6 space-y-2">
-          <li>Reach out through the contact form</li>
-          <li>Connect on social media</li>
-          <li>Share your own experiences and insights</li>
+          <li>Use the <Link href="/#contact" className="hover:text-primary">contact methods</Link> on the homepage
+          </li>
+          <li>
+            Or reach out on socials. I don't post very often but I do check <a href="https://x.com/ATMcrazy8" target="_blank" rel="noopener noreferrer" className="hover:text-primary">X (Twitter)</a> and <a href="https://www.tiktok.com/@austinmans" target="_blank" rel="noopener noreferrer" className="hover:text-primary">TikTok</a>.</li>
         </ul>
       </section>
 
       <p className="text-xl mt-12">
-        Thanks for stopping by, and I hope you'll join me on this journey of building, learning, and sharing!
+        I appreciate you checking out the blog. Let’s build some cool stuff and learn something along the way.
       </p>
     </BlogPostLayout>
   );
-} 
+}

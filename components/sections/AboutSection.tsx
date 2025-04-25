@@ -18,7 +18,7 @@ export default function AboutSection() {
       <AnimatedLogo />
       
       {/* Actual content */}
-      <div className="relative z-10 max-w-[calc(100%-40px)] flex flex-col md:flex-row container items-center justify-center mx-auto text-start gap-12">
+      <div className="relative z-10 px-0 max-w-[calc(100%-40px)] flex flex-col md:flex-row container items-center justify-center mx-auto text-start gap-12">
         {/* Floating Headshot */}
         <motion.div
           animate={{ y: [0, -5, 0] }}
