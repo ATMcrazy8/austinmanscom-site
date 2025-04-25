@@ -219,10 +219,10 @@ export default function RefereeStats() {
                   <div className="flex flex-col gap-2 flex-1 min-w-0">
                     <h3 className="text-lg font-semibold truncate">{referee.name}</h3>
                     <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
-                      <p className="whitespace-nowrap w-24">Games: {referee.totalGames}</p>
-                      <p className="whitespace-nowrap w-24">Grade: {referee.fairnessScore.grade || 'N/A'}</p>
-                      <p className="whitespace-nowrap w-24">Pen/gm: {typeof referee.minorsPerGame === 'number' ? referee.minorsPerGame.toFixed(2) : 'N/A'}</p>
-                      <p className="whitespace-nowrap w-24">Pen Diff: {typeof referee.avgPenaltyDiff === 'number' ? referee.avgPenaltyDiff.toFixed(2) : 'N/A'}</p>
+                      <p className="whitespace-nowrap w-20">Games: {referee.totalGames}</p>
+                      <p className="whitespace-nowrap w-20">Grade: {referee.fairnessScore.grade || 'N/A'}</p>
+                      <p className="whitespace-nowrap w-20">Pen/gm: {typeof referee.minorsPerGame === 'number' ? referee.minorsPerGame.toFixed(2) : 'N/A'}</p>
+                      <p className="whitespace-nowrap w-20">Pen Diff: {typeof referee.avgPenaltyDiff === 'number' ? referee.avgPenaltyDiff.toFixed(2) : 'N/A'}</p>
                     </div>
                   </div>
                 </div>
